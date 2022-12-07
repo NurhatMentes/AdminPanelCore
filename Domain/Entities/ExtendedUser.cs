@@ -1,5 +1,4 @@
-﻿using Core.Persistence.Repositories;
-using Core.Security.Entities;
+﻿using Core.Security.Entities;
 
 namespace Domain.Entities;
 
@@ -8,18 +7,18 @@ public class ExtendedUser: User
     public ExtendedUser()
     {
   
-        this.AboutUs = new HashSet<AboutUs>();
-        this.Blogs = new HashSet<Blogs>();
-        this.Categories = new HashSet<Category>();
-        this.Contact = new HashSet<Contact>();
-        this.HomeVideo = new HashSet<HomeVideo>();
-        this.Products = new HashSet<Product>();
-        this.Services = new HashSet<Service>();
-        this.SiteIdentity = new HashSet<SiteIdentity>();
-        this.Sliders = new HashSet<Slider>();
-        this.SubCategories = new HashSet<SubCategory>();
-        this.TablesLogs = new HashSet<TablesLog>();
-        this.UserLogs = new HashSet<UserLog>();
+        AboutUs = new HashSet<AboutUs>();
+        Blogs = new HashSet<Blogs>();
+        Categories = new HashSet<Category>();
+        Contact = new HashSet<Contact>();
+        HomeVideo = new HashSet<HomeVideo>();
+        Products = new HashSet<Product>();
+        Services = new HashSet<Service>();
+        SiteIdentity = new HashSet<SiteIdentity>();
+        Sliders = new HashSet<Slider>();
+        SubCategories = new HashSet<SubCategory>();
+        TablesLogs = new HashSet<TablesLog>();
+        UserLogs = new HashSet<UserLog>();
     }
     public string Job { get; set; }
     public string Phone { get; set; }

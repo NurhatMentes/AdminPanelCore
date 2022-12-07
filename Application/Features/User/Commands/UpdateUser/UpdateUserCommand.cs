@@ -11,7 +11,7 @@ using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.User.Commands.CreateUser
+namespace Application.Features.User.Commands.UpdateUser
 {
     public class UpdateUserCommand : IRequest<UpdatedUserDto>
     {

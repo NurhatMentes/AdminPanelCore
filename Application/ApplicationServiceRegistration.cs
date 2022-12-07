@@ -8,7 +8,9 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Services.AuthService;
 using Application.Auth.Rules;
+using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
+using Application.Services.ImageService;
 
 namespace Application
 {
@@ -23,8 +25,10 @@ namespace Application
 
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
+            services.AddScoped<SliderBusinessRules>();
 
             services.AddTransient<IAuthService, AuthManager>();
+            services.AddTransient<IFileService, FileManager>();
             services.AddTransient<ITokenHelper, JwtHelper>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

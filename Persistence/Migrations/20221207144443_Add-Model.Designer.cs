@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20221206125943_Add-Model")]
+    [Migration("20221207144443_Add-Model")]
     partial class AddModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,11 +193,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.AboutUs", b =>
                 {
-                    b.Property<int>("AboutUsId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutUsId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -211,33 +211,28 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool?>("State")
                         .HasColumnType("bit")
                         .HasColumnName("State)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("AboutUsId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("AboutUs", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Blogs", b =>
                 {
-                    b.Property<int>("BlogId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
@@ -254,9 +249,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -278,30 +270,28 @@ namespace Persistence.Migrations
                         .HasColumnName("Title");
 
                     b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BlogId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SubCategoryId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -320,9 +310,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -333,32 +320,30 @@ namespace Persistence.Migrations
                         .HasColumnName("State");
 
                     b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("CategoryId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
-                    b.Property<int>("CommentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("BlogId")
                         .HasColumnType("int")
                         .HasColumnName("BlogId");
 
-                    b.Property<int>("BlogsBlogId")
+                    b.Property<int>("BlogsId")
                         .HasColumnType("int");
 
                     b.Property<string>("CommentContent")
@@ -387,17 +372,14 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("FirstLastName");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProductId")
                         .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("ProductId");
 
-                    b.HasKey("CommentId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BlogsBlogId");
+                    b.HasIndex("BlogsId");
 
                     b.HasIndex("ProductId");
 
@@ -406,11 +388,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Contact", b =>
                 {
-                    b.Property<int>("ContactId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Adress")
                         .IsRequired()
@@ -439,9 +421,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Facebook");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Instagram")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -457,7 +436,7 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Twitter");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Whatsapp")
@@ -465,20 +444,20 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Whatsapp");
 
-                    b.HasKey("ContactId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Contact", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.HomeVideo", b =>
                 {
-                    b.Property<int>("HomeVideoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HomeVideoId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -492,15 +471,12 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("VideoUrl")
@@ -508,20 +484,20 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("VideoUrl");
 
-                    b.HasKey("HomeVideoId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("HomeVideo", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
@@ -552,9 +528,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("File");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -600,33 +573,27 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SubCategoryId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductSlider", b =>
                 {
-                    b.Property<int>("SliderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SliderId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -641,7 +608,7 @@ namespace Persistence.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("State");
 
-                    b.HasKey("SliderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
@@ -650,12 +617,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
                 {
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ServiceId");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -668,9 +634,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -692,26 +655,24 @@ namespace Persistence.Migrations
                         .HasColumnName("Title");
 
                     b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ServiceId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.SiteIdentity", b =>
                 {
-                    b.Property<int>("IdentityId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdentityId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -724,9 +685,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("Keywords")
                         .IsRequired()
@@ -747,23 +705,23 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdentityId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SiteIdentity", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Slider", b =>
                 {
-                    b.Property<int>("SliderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SliderId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -776,9 +734,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -794,27 +749,24 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("SliderId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Sliders", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.SubCategory", b =>
                 {
-                    b.Property<int>("SubCategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategoryId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("CategoryId")
                         .IsRequired()
@@ -827,9 +779,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
                         .IsRequired()
@@ -849,14 +798,11 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubCategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SubCategories", (string)null);
                 });
@@ -890,17 +836,14 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.TablesLog", b =>
                 {
-                    b.Property<int>("TablesLogsId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TablesLogsId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int")
@@ -929,29 +872,23 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("TablesLogsId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("TablesLogs", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UserLog", b =>
                 {
-                    b.Property<int>("UserLogId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserLogId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LogDate")
                         .HasColumnType("datetime2")
@@ -966,12 +903,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("UserLogId");
-
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserLogs", (string)null);
                 });
@@ -979,11 +913,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ExtendedUser", b =>
                 {
                     b.HasBaseType("Core.Security.Entities.User");
-
-                    b.Property<string>("Auth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Auth");
 
                     b.Property<string>("Job")
                         .IsRequired()
@@ -1032,13 +961,13 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.AboutUs", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("AboutUs")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Blogs", b =>
@@ -1055,9 +984,9 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Blogs")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1065,25 +994,25 @@ namespace Persistence.Migrations
 
                     b.Navigation("SubCategories");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Categories")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
                     b.HasOne("Domain.Entities.Blogs", "Blogs")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogsBlogId")
+                        .HasForeignKey("BlogsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1100,24 +1029,24 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Contact", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Contact")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.HomeVideo", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("HomeVideo")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -1134,9 +1063,9 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1144,51 +1073,51 @@ namespace Persistence.Migrations
 
                     b.Navigation("SubCategories");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductSlider", b =>
                 {
-                    b.HasOne("Domain.Entities.Product", "Products")
+                    b.HasOne("Domain.Entities.Product", "Product")
                         .WithMany("ProductSliders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Products");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Services")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.SiteIdentity", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("SiteIdentity")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Slider", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("Sliders")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.SubCategory", b =>
@@ -1199,37 +1128,35 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("SubCategories")
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Categories");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.TablesLog", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("TablesLogs")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserLog", b =>
                 {
-                    b.HasOne("Domain.Entities.ExtendedUser", "Users")
+                    b.HasOne("Domain.Entities.ExtendedUser", "User")
                         .WithMany("UserLogs")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Security.Entities.User", b =>

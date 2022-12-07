@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Uploads\Sliders - Copy\**" />
+    <Content Remove="wwwroot\Uploads\Sliders - Copy\**" />
+    <EmbeddedResource Remove="wwwroot\Uploads\Sliders - Copy\**" />
+    <None Remove="wwwroot\Uploads\Sliders - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +29,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Slider\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using Application.Features.User.Commands.CreateUser;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using Application.Features.User.Commands.UpdateUser;
 using Application.Features.User.Dtos;
 using Application.Features.User.Models;
 using Application.Features.User.Queries;

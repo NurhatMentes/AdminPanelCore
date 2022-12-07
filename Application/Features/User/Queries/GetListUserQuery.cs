@@ -31,7 +31,7 @@ namespace Application.Features.User.Queries
                 IPaginate<ExtendedUser> usersAsync = await _repository.GetListAsync(
                     index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
-                //data model
+
                 UserListModel mappedListModel = _mapper.Map<UserListModel>(usersAsync);
 
                 return mappedListModel;
