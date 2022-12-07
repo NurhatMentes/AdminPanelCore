@@ -27,15 +27,18 @@ namespace Application.Features.Auth.Commands.Register
         {
             private readonly IUserRepository _userRepository;
             private readonly IAuthService _authService;
+            private readonly AuthBusinessRules _authBusinessRules;
 
-            public RegisterCommandHandler( IUserRepository userRepository, IAuthService authService)
+            public RegisterCommandHandler( IUserRepository userRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
             {
                 _userRepository = userRepository;
                 _authService = authService;
+                _authBusinessRules = authBusinessRules;
             }
 
             public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
+                await _authBusinessRules.UserCanNotBeDuplicatedWhenInserted(request.UserForRegisterDto.Email);
                 HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out var passWordHash, out var passwordSalt);
 
                 ExtendedUser user = new ExtendedUser
