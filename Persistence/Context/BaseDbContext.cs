@@ -46,7 +46,7 @@ namespace Persistence.Context
             modelBuilder.Entity<ExtendedUser>(a =>
             {
                 a.ToTable("Users");
-                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Id).HasColumnName("UserId");
                 a.Property(p => p.Email).HasColumnName("Email");
                 a.Property(p => p.Status).HasColumnName("Status");
                 a.Property(p => p.AuthenticatorType).HasColumnName("AuthenticatorType");
@@ -77,6 +77,7 @@ namespace Persistence.Context
             modelBuilder.Entity<AboutUs>(a =>
             {
                 a.ToTable("AboutUs").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("AboutId");
                 a.Property(p => p.Description).HasColumnName("Description");
                 a.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 a.Property(p => p.State).HasColumnName("State)");
@@ -87,6 +88,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Blogs>(b =>
             {
                 b.ToTable("Blogs").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("BlogId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.CategoryId).HasColumnName("CategoryId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
@@ -104,6 +106,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Category>(b =>
             {
                 b.ToTable("Categories").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("CategoryId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.CategoryName).HasColumnName("CategoryName");
@@ -119,6 +122,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Comment>(b =>
             {
                 b.ToTable("Comments").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("CommentId");
                 b.Property(p => p.BlogId).HasColumnName("BlogId");
                 b.Property(p => p.ProductId).HasColumnName("ProductId");
                 b.Property(p => p.FirstLastName).HasColumnName("FirstLastName");
@@ -133,6 +137,8 @@ namespace Persistence.Context
             modelBuilder.Entity<Contact>(b =>
             {
                 b.ToTable("Contact").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("ContactId");
+                b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Adress).HasColumnName("Adress");
                 b.Property(p => p.Tel).HasColumnName("Tel");
@@ -148,6 +154,8 @@ namespace Persistence.Context
             modelBuilder.Entity<HomeVideo>(b =>
             {
                 b.ToTable("HomeVideo").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("HomeVideoId");
+                b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Title).HasColumnName("Title");
                 b.Property(p => p.Description).HasColumnName("Description");
@@ -158,6 +166,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Product>(b =>
             {
                 b.ToTable("Products").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("ProductId");
                 b.Property(p => p.CategoryId).HasColumnName("CategoryId");
                 b.Property(p => p.SubCategoryId).HasColumnName("SubCategoryId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
@@ -185,6 +194,7 @@ namespace Persistence.Context
             modelBuilder.Entity<ProductSlider>(b =>
             {
                 b.ToTable("ProductSliders").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("ProductSliderId");
                 b.Property(p => p.ProductId).HasColumnName("ProductId");
                 b.Property(p => p.ImgUrl).HasColumnName("ImgUrl");
                 b.Property(p => p.State).HasColumnName("State");
@@ -195,6 +205,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Service>(b =>
             {
                 b.ToTable("Services").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("ServiceId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Title).HasColumnName("Title");
@@ -208,6 +219,8 @@ namespace Persistence.Context
             modelBuilder.Entity<SiteIdentity>(b =>
             {
                 b.ToTable("SiteIdentity").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("SiteIdentityId");
+                b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Title).HasColumnName("Title");
                 b.Property(p => p.Keywords).HasColumnName("Keywords");
@@ -220,6 +233,7 @@ namespace Persistence.Context
             modelBuilder.Entity<Slider>(b =>
             {
                 b.ToTable("Sliders").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("SliderId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Title).HasColumnName("Title");
@@ -232,6 +246,7 @@ namespace Persistence.Context
             modelBuilder.Entity<SubCategory>(b =>
             {
                 b.ToTable("SubCategories").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("SubCategoryId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.CategoryId).HasColumnName("CategoryId");
@@ -255,6 +270,7 @@ namespace Persistence.Context
             modelBuilder.Entity<TablesLog>(b =>
             {
                 b.ToTable("TablesLogs").HasKey(k => k.Id);
+                b.Property(p => p.Id).HasColumnName("TablesLogId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.ItemId).HasColumnName("ItemId");
                 b.Property(p => p.TableName).HasColumnName("TableName");
@@ -267,6 +283,7 @@ namespace Persistence.Context
             modelBuilder.Entity<UserLog>(b =>
             {
                 b.ToTable("UserLogs").HasKey(k => k.Id); ;
+                b.Property(p => p.Id).HasColumnName("UserLogId");
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.State).HasColumnName("State");
                 b.Property(p => p.LogDate).HasColumnName("LogDate");

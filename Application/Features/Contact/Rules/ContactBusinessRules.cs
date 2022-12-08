@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Slider.Constants;
+﻿
+using Application.Features.Contact.Constants;
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
-using Domain.Entities;
 
-namespace Application.Features.Slider.Rules
+namespace Application.Features.Contact.Rules
 {
-    public class SliderBusinessRules
+    public class ContactBusinessRules
     {
-        ISliderRepository _repository;
+        private IContactRepository _repository;
         private IUserRepository _userRepository;
 
-        public SliderBusinessRules(ISliderRepository sliderRepository, IUserRepository userRepository)
+        public ContactBusinessRules(IContactRepository repository, IUserRepository userRepository)
         {
-            _repository = sliderRepository;
+            _repository = repository;
             _userRepository = userRepository;
         }
 

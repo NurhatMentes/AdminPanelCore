@@ -11,6 +11,7 @@ using Application.Auth.Rules;
 using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.ImageService;
+using Application.Features.Contact.Rules;
 
 namespace Application
 {
@@ -26,6 +27,7 @@ namespace Application
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
+            services.AddScoped<ContactBusinessRules>();
 
             services.AddTransient<IAuthService, AuthManager>();
             services.AddTransient<IFileService, FileManager>();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp;
 using Microsoft.AspNetCore.Http.Internal;
+using SixLabors.ImageSharp.Processing;
 
 namespace Application.Services.ImageService
 {
@@ -34,8 +35,9 @@ namespace Application.Services.ImageService
             // jpeg resmini ImageSharp kütüphanesi ile yükleyin
             using (Image<Rgba32> image = Image.Load<Rgba32>(jpegFilePath))
             {
+                image.Mutate(x => x.Resize(1920, 1080));
                 // resmi webp formatına kaydedin
-               image.Save(webpFilePath, new SixLabors.ImageSharp.Formats.Webp.WebpEncoder());
+                image.Save(webpFilePath, new SixLabors.ImageSharp.Formats.Webp.WebpEncoder());
             }
 
             return "";

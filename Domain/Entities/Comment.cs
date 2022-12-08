@@ -14,4 +14,19 @@ public class Comment : Entity
 
     public virtual Blogs Blogs { get; set; }
     public virtual Product Products { get; set; }
+
+    public Comment()
+    {
+    }
+    public Comment(int? blogId, int? productId, string firstLastName, string email, string commentContent, bool confirmation, DateTime? date)
+    {
+        BlogId = blogId;
+        ProductId = productId;
+        FirstLastName = firstLastName;
+        Email = email;
+        CommentContent = commentContent;
+        Confirmation = confirmation;
+        Date = date;
+    }
+
 }

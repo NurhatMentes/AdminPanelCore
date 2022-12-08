@@ -21,12 +21,9 @@ namespace Application.Features.Slider.Commands.CreateSlider
     public class CreateSliderCommand : IRequest<CreatedSliderDto>
     {
         public IFormFile File { get; set; }
-        
         public int UserId { get; set; }
-        public int? EmendatorAdminId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool State { get; set; }
 
         public class CreateSliderCommandHandler : IRequestHandler<CreateSliderCommand, CreatedSliderDto>
         {
@@ -53,8 +50,8 @@ namespace Application.Features.Slider.Commands.CreateSlider
                     ImgUrl = "wwwroot\\Uploads\\Sliders\\" + request.File.FileName.Split(".")[0]+".webp",
                     UserId = request.UserId,
                     Description = request.Description,
-                    EmendatorAdminId = request.EmendatorAdminId,
-                    State = request.State,
+                    EmendatorAdminId = null,
+                    State = true,
                     Title = request.Title,
                 };
 
