@@ -3,8 +3,6 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
-using Core.Persistence.Repositories;
-using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
 

@@ -21,7 +21,7 @@ namespace Application.Features.Contact.Profiles
             CreateMap<Domain.Entities.Contact, CreateContactCommand>().ReverseMap();
             CreateMap<Domain.Entities.Contact, CreatedContactDto>()
                 .ForMember(p => p.EmendatorAdminId, opt => opt.MapFrom(p => p.User.Id))
-                .ForMember(p => p.ContactId, opt => opt.MapFrom(p => p.Id)).ReverseMap();
+                .ForMember(p => p.Id, opt => opt.MapFrom(p => p.Id)).ReverseMap();
 
             CreateMap<Domain.Entities.Contact, UpdateContactCommand>().ReverseMap();
             CreateMap<Domain.Entities.Contact, UpdatedContactDto>()

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.User.Dtos;
+﻿using Application.Features.User.Dtos;
 using Application.Features.Users.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
-using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
 

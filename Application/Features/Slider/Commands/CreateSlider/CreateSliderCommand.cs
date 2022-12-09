@@ -1,20 +1,10 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Features.Slider.Dtos;
 using Application.Services.ImageService;
 using Application.Services.Repositories;
 using AutoMapper;
-using Core.Security.Entities;
-using Core.Application.Requests;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using System.Xml.Linq;
 using Application.Features.Slider.Rules;
-using Application.Features.Users.Rules;
 
 namespace Application.Features.Slider.Commands.CreateSlider
 {

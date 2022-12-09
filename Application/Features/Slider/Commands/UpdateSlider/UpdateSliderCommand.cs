@@ -3,15 +3,8 @@ using Application.Features.Slider.Rules;
 using Application.Services.ImageService;
 using Application.Services.Repositories;
 using AutoMapper;
-using Core.Security.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Slider.Commands.UpdateSlider
 {

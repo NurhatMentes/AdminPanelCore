@@ -8,10 +8,12 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Services.AuthService;
 using Application.Auth.Rules;
+using Application.Features.AboutUs.Rules;
 using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.ImageService;
 using Application.Features.Contact.Rules;
+using Application.Features.SiteIdentity.Rules;
 
 namespace Application
 {
@@ -28,6 +30,8 @@ namespace Application
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ContactBusinessRules>();
+            services.AddScoped<AboutUsBusinessRules>();
+            services.AddScoped<SiteIdentityBusinessRules>();
 
             services.AddTransient<IAuthService, AuthManager>();
             services.AddTransient<IFileService, FileManager>();

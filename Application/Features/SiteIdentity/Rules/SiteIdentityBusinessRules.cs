@@ -1,15 +1,20 @@
-﻿using Application.Features.Slider.Constants;
-using Application.Services.Repositories;
+﻿using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Application.Features.SiteIdentity.Constants;
 
-namespace Application.Features.Slider.Rules
+namespace Application.Features.SiteIdentity.Rules
 {
-    public class SliderBusinessRules
+    public class SiteIdentityBusinessRules
     {
-        ISliderRepository _repository;
+        ISiteIdentityRepository _repository;
         private IUserRepository _userRepository;
 
-        public SliderBusinessRules(ISliderRepository sliderRepository, IUserRepository userRepository)
+        public SiteIdentityBusinessRules(ISiteIdentityRepository sliderRepository, IUserRepository userRepository)
         {
             _repository = sliderRepository;
             _userRepository = userRepository;

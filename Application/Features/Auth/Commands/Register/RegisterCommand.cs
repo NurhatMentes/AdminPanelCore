@@ -1,19 +1,13 @@
-﻿using Application.Auth.Dtos;
-using Application.Auth.Rules;
+﻿using Application.Auth.Rules;
 using Application.Features.Auth.Dtos;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
-using AutoMapper;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Features.Auth.Commands.Register
 {

@@ -12,5 +12,6 @@ namespace Application.Services.ImageService
     public interface IFileService
     {
         public Task<string> ImageUpload(IFormFile imgUrl, string fileName);
+        public Task<string> LogoImageUpload(IFormFile logoUrl, string fileName);
     }
 }

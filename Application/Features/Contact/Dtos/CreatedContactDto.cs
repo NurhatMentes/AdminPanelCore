@@ -8,7 +8,7 @@ namespace Application.Features.Contact.Dtos
 {
     public class CreatedContactDto
     {
-        public int ContactId { get; set; }
+        public int Id { get; set; }
         public int? UserId { get; set; }
         public int? EmendatorAdminId { get; set; }
         public string Adress { get; set; }
