@@ -9,18 +9,16 @@ public class TablesLog : Entity
     public string TableName { get; set; }
     public string ItemName { get; set; }
     public string Process { get; set; }
-    public DateTime LogDate { get; set; }
 
     public virtual ExtendedUser User { get; set; }
 
-    public TablesLog(int id, DateTime creationTime, int? userId, int itemId, string tableName, string itemName, string process, DateTime logDate) : base(id, creationTime)
+    public TablesLog(int id, DateTime creationTime, int? userId, int itemId, string tableName, string itemName, string process) : base(id, creationTime)
     {
         UserId = userId;
         ItemId = itemId;
         TableName = tableName;
         ItemName = itemName;
         Process = process;
-        LogDate = logDate;
     }
 
     public TablesLog()

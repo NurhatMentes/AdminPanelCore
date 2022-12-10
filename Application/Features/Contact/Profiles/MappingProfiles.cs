@@ -1,15 +1,8 @@
 ﻿using Application.Features.Contact.Commands.CreateContact;
 using Application.Features.Contact.Dtos;
 using Application.Features.Contact.Models;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Dtos;
 using AutoMapper;
 using Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Features.Contact.Commands.UpdateContact;
 
 namespace Application.Features.Contact.Profiles

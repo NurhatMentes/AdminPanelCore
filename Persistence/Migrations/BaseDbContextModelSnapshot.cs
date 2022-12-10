@@ -652,14 +652,14 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImgUrl");
 
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Keywords");
+
                     b.Property<bool>("State")
                         .HasColumnType("bit")
                         .HasColumnName("State");
-
-                    b.Property<string>("Tag")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Tag");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -872,10 +872,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ItemName");
-
-                    b.Property<DateTime>("LogDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LogDate");
 
                     b.Property<string>("Process")
                         .IsRequired()

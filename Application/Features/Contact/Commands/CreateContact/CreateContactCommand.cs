@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Contact.Dtos;
-using Application.Features.Contact.Rules;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Dtos;
-using Application.Features.Slider.Rules;
-using Application.Services.ImageService;
+﻿using Application.Features.Contact.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Contact.Commands.CreateContact
 {

@@ -209,7 +209,7 @@ namespace Persistence.Context
                 b.Property(p => p.UserId).HasColumnName("UserId");
                 b.Property(p => p.EmendatorAdminId).HasColumnName("EmendatorAdminId");
                 b.Property(p => p.Title).HasColumnName("Title");
-                b.Property(p => p.Tag).HasColumnName("Tag");
+                b.Property(p => p.Keywords).HasColumnName("Keywords");
                 b.Property(p => p.Description).HasColumnName("Description");
                 b.Property(p => p.ImgUrl).HasColumnName("ImgUrl");
                 b.Property(p => p.State).HasColumnName("State");
@@ -276,7 +276,6 @@ namespace Persistence.Context
                 b.Property(p => p.TableName).HasColumnName("TableName");
                 b.Property(p => p.ItemName).HasColumnName("ItemName");
                 b.Property(p => p.Process).HasColumnName("Process");
-                b.Property(p => p.LogDate).HasColumnName("LogDate");
                 b.HasOne(p => p.User);
             });
 

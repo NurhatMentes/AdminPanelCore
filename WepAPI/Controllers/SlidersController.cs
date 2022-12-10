@@ -3,10 +3,7 @@ using Application.Features.Slider.Commands.UpdateSlider;
 using Application.Features.Slider.Dtos;
 using Application.Features.Slider.Models;
 using Application.Features.Slider.Queries;
-using Application.Features.User.Models;
-using Application.Features.User.Queries;
 using Core.Application.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers

@@ -3,13 +3,7 @@ using Application.Features.Contact.Commands.UpdateContact;
 using Application.Features.Contact.Dtos;
 using Application.Features.Contact.Models;
 using Application.Features.Contact.Queries;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Commands.UpdateSlider;
-using Application.Features.Slider.Dtos;
-using Application.Features.Slider.Models;
-using Application.Features.Slider.Queries;
 using Core.Application.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers

@@ -13,9 +13,9 @@ using AutoMapper;
 
 namespace Application.Features.AboutUs.Profiles
 {
-    public class MappingProfilesÇ:Profile
+    public class MappingProfiles:Profile
     {
-        public MappingProfilesÇ()
+        public MappingProfiles()
         {
             CreateMap<Domain.Entities.AboutUs, CreateAboutUsCommand>().ReverseMap();
             CreateMap<Domain.Entities.AboutUs, CreatedAboutUsDto>()

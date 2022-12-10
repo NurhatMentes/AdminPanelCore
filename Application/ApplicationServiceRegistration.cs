@@ -9,11 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Services.AuthService;
 using Application.Auth.Rules;
 using Application.Features.AboutUs.Rules;
+using Application.Features.Category.Rules;
 using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.ImageService;
 using Application.Features.Contact.Rules;
+using Application.Features.Service.Rules;
 using Application.Features.SiteIdentity.Rules;
+using Application.Features.SubCategory.Rules;
+using Application.Features.TablesLog.Rules;
 
 namespace Application
 {
@@ -30,8 +34,12 @@ namespace Application
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ContactBusinessRules>();
+            services.AddScoped<CategoryBusinessRules>();
+            services.AddScoped<SubCategoryBusinessRules>();
             services.AddScoped<AboutUsBusinessRules>();
             services.AddScoped<SiteIdentityBusinessRules>();
+            services.AddScoped<TablesLogBusinessRules>();
+            services.AddScoped<ServiceBusinessRules>();
 
             services.AddTransient<IAuthService, AuthManager>();
             services.AddTransient<IFileService, FileManager>();

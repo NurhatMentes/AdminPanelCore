@@ -1,10 +1,6 @@
 ﻿using Application.Features.SiteIdentity.Commands.CreateSiteIdentity;
 using Application.Features.SiteIdentity.Commands.UpdateSiteIdentity;
 using Application.Features.SiteIdentity.Dtos;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Commands.UpdateSlider;
-using Application.Features.Slider.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers

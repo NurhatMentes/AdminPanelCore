@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Contact.Models;
-using Application.Features.Slider.Models;
-using Application.Features.Slider.Queries;
+﻿using Application.Features.Contact.Models;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Requests;

@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using Application.Features.User.Commands.UpdateUser;
+﻿using Application.Features.User.Commands.UpdateUser;
 using Application.Features.User.Dtos;
 using Application.Features.User.Models;
 using Application.Features.User.Queries;
 using Core.Application.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers
