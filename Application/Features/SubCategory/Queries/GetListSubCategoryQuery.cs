@@ -26,7 +26,7 @@ namespace Application.Features.SubCategory.Queries
             public async Task<SubCategoryListModel> Handle(GetListSubCategoryQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<Domain.Entities.SubCategory> subCategoryAsync = await _repository.GetListAsync(
-                    include: m => m.Include(m => m.Categories).Include(m=>m.User),
+                    include: m => m.Include(m => m.Categories).Include(m => m.User),
                     index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
                 //data model

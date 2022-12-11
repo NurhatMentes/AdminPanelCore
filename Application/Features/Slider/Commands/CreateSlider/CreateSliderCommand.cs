@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Application.Features.Slider.Dtos;
-using Application.Services.ImageService;
 using Application.Services.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Application.Features.Slider.Rules;
+using Application.Services.FileService;
 
 namespace Application.Features.Slider.Commands.CreateSlider
 {

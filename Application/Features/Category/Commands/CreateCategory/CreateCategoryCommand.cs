@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Category.Dtos;
+﻿using Application.Features.Category.Dtos;
 using Application.Features.Category.Rules;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Dtos;
-using Application.Features.Slider.Rules;
-using Application.Services.ImageService;
+using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
@@ -26,9 +18,9 @@ namespace Application.Features.Category.Commands.CreateCategory
 
         public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreatedCategoryDto>
         {
-            ICategoryRepository _repository;
-            IMapper _mapper;
-            IFileService _imageService;
+            private readonly ICategoryRepository _repository;
+            private readonly IMapper _mapper;
+            private readonly IFileService _imageService;
             private readonly CategoryBusinessRules _businessRules;
 
             public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper, IFileService imageService, CategoryBusinessRules businessRules)

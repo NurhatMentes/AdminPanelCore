@@ -3,8 +3,8 @@
     public class SubCategoryListDto
     {
         public int SubCategoryId { get; set; }
-        public int UserId { get; set; }
-        public int EmendatorAdminId { get; set; }
+        public string UserName { get; set; }
+        public string EmendatorAdminName { get; set; }
         public string SubCategoryName { get; set; }
         public string CategoryName { get; set; }
         public string ImgUrl { get; set; }

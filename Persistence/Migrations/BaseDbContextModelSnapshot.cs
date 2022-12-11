@@ -525,10 +525,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Date");
-
                     b.Property<int?>("EmendatorAdminId")
                         .HasColumnType("int")
                         .HasColumnName("EmendatorAdminId");
@@ -542,6 +538,11 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImgUrl");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Keywords");
 
                     b.Property<double?>("OldPrice")
                         .HasColumnType("float")
@@ -563,11 +564,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("SubCategoryId");
-
-                    b.Property<string>("Tag")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Tag");
 
                     b.Property<string>("Title")
                         .IsRequired()

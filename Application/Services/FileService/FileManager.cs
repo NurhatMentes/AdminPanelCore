@@ -1,12 +1,14 @@
-﻿using Core.CrossCuttingConcerns.Exceptions;
+﻿using AutoMapper;
+using Core.CrossCuttingConcerns.Exceptions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SixLabors.ImageSharp.PixelFormats;
+using Microsoft.AspNetCore.Http.Internal;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using System.IO;
 
-namespace Application.Services.ImageService
+namespace Application.Services.FileService
 {
     public class FileManager:IFileService
     {
@@ -14,14 +16,14 @@ namespace Application.Services.ImageService
 
         public async Task<string> ImageUpload(IFormFile imgUrl, string fileName)
         {
-            if (imgUrl.Length > 16000000)
+            if (imgUrl.Length < 16000000)
             {
                 if (allowedTypes.Contains(imgUrl.ContentType))
                 {
-                    //  resmin dosya yolunu belirtin
-                    string jpegFilePath = Path.GetTempFileName();
+                    // resmin dosya yolunu belirtin
+                    string FilePath = Path.GetTempFileName();
 
-                    using (var stream = File.Create(jpegFilePath))
+                    using (var stream = File.Create(FilePath))
                     {
                         await imgUrl.CopyToAsync(stream);
                     }
@@ -34,7 +36,7 @@ namespace Application.Services.ImageService
 
 
                     // jpeg resmini ImageSharp kütüphanesi ile yükleyin
-                    using (Image<Rgba32> image = Image.Load<Rgba32>(jpegFilePath))
+                    using (Image<Rgba32> image = Image.Load<Rgba32>(FilePath))
                     {
                         image.Mutate(x => x.Resize(1920, 1080));
                         // resmi webp formatına kaydedin
@@ -70,6 +72,42 @@ namespace Application.Services.ImageService
                 image.Save(webpFilePath, new SixLabors.ImageSharp.Formats.Webp.WebpEncoder());
             }
 
+            return "";
+        }
+
+        public async Task<string> FileUpload(IFormFile file, string fileName)
+        {
+            if (file == null || file.Length == 0)
+            {
+                throw new Exception("Dosya yüklenemedi");
+            }
+
+            if (file.ContentType != "application/pdf")
+            {
+                throw new Exception("Geçersiz dosya türü. PDF dosyası yükleyiniz");
+            }
+
+            if (Path.GetExtension(file.FileName) != ".pdf")
+            {
+                throw new InvalidOperationException("Geçersiz dosya uzantısı. Lütfen sadece pdf dosyaları yükleyin.");
+            }
+
+
+            // Dosya yolunu belirle
+            var filePath = Path.Combine("wwwroot\\Pdfs\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".pdf");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            // Dosyayı yükle
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+
+            
             return "";
         }
     }

@@ -1,10 +1,10 @@
 ﻿using Application.Features.SubCategory.Dtos;
-using Application.Services.ImageService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Application.Features.SubCategory.Rules;
+using Application.Services.FileService;
 
 namespace Application.Features.SubCategory.Commands.CreateSubCategory
 {
@@ -12,7 +12,7 @@ namespace Application.Features.SubCategory.Commands.CreateSubCategory
     {
         public IFormFile File { get; set; }
         public int UserId { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string SubCategoryName { get; set; }
         public bool State { get; set; }
 
@@ -34,6 +34,7 @@ namespace Application.Features.SubCategory.Commands.CreateSubCategory
             public async Task<CreatedSubCategoryDto> Handle(CreateSubCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _businessRules.UserShouldExistWhenRequested(request.UserId);
+                await _businessRules.CategoryShouldExistWhenRequested(request.CategoryId);
                 await _imageService.ImageUpload(request.File, "SubCategories");
 
                 Domain.Entities.SubCategory subCategory = new Domain.Entities.SubCategory()

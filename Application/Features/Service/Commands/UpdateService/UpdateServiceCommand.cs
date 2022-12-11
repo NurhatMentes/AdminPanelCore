@@ -1,6 +1,6 @@
 ﻿using Application.Features.Service.Dtos;
 using Application.Features.Service.Rules;
-using Application.Services.ImageService;
+using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;

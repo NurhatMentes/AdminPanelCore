@@ -22,7 +22,7 @@ namespace Application.Features.Users.Rules
         public async Task UserShouldExistWhenRequested(string email)
         {
             var result = await _userRepository.GetListAsync(b => b.Email == email);
-            if (!result.Items.Any()) throw new BusinessException(Messages.ShouldExistWhenRequested);
+            if (!result.Items.Any()) throw new BusinessException(Messages.UserShouldExistWhenRequested);
         }
     }
 }

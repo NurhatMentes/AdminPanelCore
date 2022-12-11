@@ -7,6 +7,7 @@ public class Product : Entity
     public int CategoryId { get; set; }
     public int? SubCategoryId { get; set; }
     public int? UserId { get; set; }
+    public int? EmendatorAdminId { get; set; }
     public string Title { get; set; }
     public double Price { get; set; }
     public double? OldPrice { get; set; }
@@ -14,10 +15,8 @@ public class Product : Entity
     public string Color { get; set; }
     public string File { get; set; }
     public string Content { get; set; }
-    public DateTime Date { get; set; }
     public DateTime? UpdateDate { get; set; }
-    public int? EmendatorAdminId { get; set; }
-    public string Tag { get; set; }
+    public string Keywords { get; set; }
     public string ImgUrl { get; set; }
     public bool State { get; set; }
 
@@ -27,7 +26,7 @@ public class Product : Entity
     public virtual ExtendedUser User { get; set; }
     public virtual ICollection<ProductSlider> ProductSliders { get; set; }
 
-    public Product(int id, DateTime creationTime, int categoryId, int? subCategoryId, int? userId, string title, double price, double? oldPrice, int? stock, string color, string file, string content, DateTime date, DateTime? updateDate, int? emendatorAdminId, string tag, string imgUrl, bool state) : base(id, creationTime)
+    public Product(int id, DateTime creationTime, int categoryId, int? subCategoryId, int? userId, string title, double price, double? oldPrice, int? stock, string color, string file, string content, DateTime? updateDate, int? emendatorAdminId, string tag, string imgUrl, bool state) : base(id, creationTime)
     {
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
@@ -39,10 +38,9 @@ public class Product : Entity
         Color = color;
         File = file;
         Content = content;
-        Date = date;
         UpdateDate = updateDate;
         EmendatorAdminId = emendatorAdminId;
-        Tag = tag;
+        Keywords = tag;
         ImgUrl = imgUrl;
         State = state;
     }

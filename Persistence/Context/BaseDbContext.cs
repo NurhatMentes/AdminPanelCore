@@ -178,9 +178,8 @@ namespace Persistence.Context
                 b.Property(p => p.Color).HasColumnName("Color");
                 b.Property(p => p.File).HasColumnName("File");
                 b.Property(p => p.Content).HasColumnName("Content");
-                b.Property(p => p.Date).HasColumnName("Date");
                 b.Property(p => p.UpdateDate).HasColumnName("UpdateDate");
-                b.Property(p => p.Tag).HasColumnName("Tag");
+                b.Property(p => p.Keywords).HasColumnName("Keywords");
                 b.Property(p => p.ImgUrl).HasColumnName("ImgUrl");
                 b.Property(p => p.State).HasColumnName("State");
                 b.HasOne(p => p.User);

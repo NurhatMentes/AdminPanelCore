@@ -1,9 +1,7 @@
-﻿
-using Application.Features.Auth.Constants;
+﻿using Application.Features.Auth.Constants;
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using Domain.Entities;
 
 namespace Application.Auth.Rules
@@ -25,7 +23,7 @@ namespace Application.Auth.Rules
 
         public void UserShouldExistWhenRequested(ExtendedUser user)
         {
-            if (user == null) throw new BusinessException(Messages.ShouldExistWhenRequested);
+            if (user == null) throw new BusinessException(Messages.UserShouldExistWhenRequested);
         }
     }
 }

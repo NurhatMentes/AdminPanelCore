@@ -1,10 +1,10 @@
-﻿using Application.Services.ImageService;
-using Application.Services.Repositories;
+﻿using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Application.Features.SubCategory.Dtos;
 using Application.Features.SubCategory.Rules;
+using Application.Services.FileService;
 
 namespace Application.Features.SubCategory.Commands.UpdateSubCategory
 {
@@ -14,7 +14,7 @@ namespace Application.Features.SubCategory.Commands.UpdateSubCategory
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int EmendatorAdminId { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string SubCategoryName { get; set; }
         public bool State { get; set; }
 
@@ -36,6 +36,7 @@ namespace Application.Features.SubCategory.Commands.UpdateSubCategory
             public async Task<UpdatedSubCategoryDto> Handle(UpdateSubCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _businessRules.UserShouldExistWhenRequested(request.EmendatorAdminId);
+                await _businessRules.CategoryShouldExistWhenRequested(request.CategoryId);
                 await _imageService.ImageUpload(request.File, "SubCategories");
 
 

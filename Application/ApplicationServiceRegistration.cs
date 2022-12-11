@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Core.Security.JWT;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
@@ -12,12 +11,13 @@ using Application.Features.AboutUs.Rules;
 using Application.Features.Category.Rules;
 using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
-using Application.Services.ImageService;
 using Application.Features.Contact.Rules;
+using Application.Features.Product.Rules;
 using Application.Features.Service.Rules;
 using Application.Features.SiteIdentity.Rules;
 using Application.Features.SubCategory.Rules;
 using Application.Features.TablesLog.Rules;
+using Application.Services.FileService;
 
 namespace Application
 {
@@ -33,6 +33,7 @@ namespace Application
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
+            services.AddScoped<ProductBusinessRules>();
             services.AddScoped<ContactBusinessRules>();
             services.AddScoped<CategoryBusinessRules>();
             services.AddScoped<SubCategoryBusinessRules>();

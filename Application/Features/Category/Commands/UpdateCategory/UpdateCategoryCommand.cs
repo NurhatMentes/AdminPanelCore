@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Category.Commands.CreateCategory;
-using Application.Features.Category.Dtos;
+﻿using Application.Features.Category.Dtos;
 using Application.Features.Category.Rules;
-using Application.Services.ImageService;
+using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;

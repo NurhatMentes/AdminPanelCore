@@ -2,9 +2,6 @@
 using Application.Features.Category.Commands.UpdateCategory;
 using Application.Features.Category.Dtos;
 using Application.Features.Category.Models;
-using Application.Features.Slider.Commands.UpdateSlider;
-using Application.Features.Slider.Dtos;
-using Application.Features.Slider.Models;
 using AutoMapper;
 using Core.Persistence.Paging;
 

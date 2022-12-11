@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.SiteIdentity.Commands.CreateSiteIdentity;
+﻿using Application.Features.SiteIdentity.Commands.CreateSiteIdentity;
 using Application.Features.SiteIdentity.Commands.UpdateSiteIdentity;
 using Application.Features.SiteIdentity.Dtos;
-using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Commands.UpdateSlider;
-using Application.Features.Slider.Dtos;
 using AutoMapper;
 
 namespace Application.Features.SiteIdentity.Profiles

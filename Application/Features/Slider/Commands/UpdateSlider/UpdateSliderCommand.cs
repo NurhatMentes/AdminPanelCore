@@ -1,6 +1,6 @@
 ﻿using Application.Features.Slider.Dtos;
 using Application.Features.Slider.Rules;
-using Application.Services.ImageService;
+using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;

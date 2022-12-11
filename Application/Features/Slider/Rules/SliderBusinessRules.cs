@@ -18,7 +18,7 @@ namespace Application.Features.Slider.Rules
         public async Task UserShouldExistWhenRequested(int userId)
         {
             var user = await _userRepository.GetAsync(a => a.Id == userId);
-            if (user == null) throw new BusinessException(Messages.ShouldExistWhenRequested);
+            if (user == null) throw new BusinessException(Messages.UserShouldExistWhenRequested);
         }
     }
 }
