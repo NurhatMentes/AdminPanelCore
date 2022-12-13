@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using SixLabors.ImageSharp;
@@ -12,6 +13,13 @@ namespace Application.Services.FileService
 {
     public class FileManager:IFileService
     {
+        private readonly IHostingEnvironment _hostingEnv;
+
+        public FileManager(IHostingEnvironment hostingEnv)
+        {
+            _hostingEnv = hostingEnv;
+        }
+
         string[] allowedTypes = { "image/jpeg", "image/jpg", "image/png" };
 
         public async Task<string> ImageUpload(IFormFile imgUrl, string fileName)
@@ -92,15 +100,22 @@ namespace Application.Services.FileService
                 throw new InvalidOperationException("Geçersiz dosya uzantısı. Lütfen sadece pdf dosyaları yükleyin.");
             }
 
+            //dosya adını uzantısız şekilde alır
+            var pdfName = Path.GetFileName(file.FileName);
+
+            //dosya konumu bulunmuyorsa dosya konumu oluşturur
+            Directory.CreateDirectory("wwwroot\\Pdfs\\" + fileName);
 
             // Dosya yolunu belirle
-            var filePath = Path.Combine("wwwroot\\Pdfs\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".pdf");
+            //var filePath = Path.Combine("wwwroot\\Pdfs\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".pdf");
+
+            var filePath = Path.Combine(_hostingEnv.WebRootPath,"Pdfs\\"+fileName, pdfName);
 
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
-
+            
             // Dosyayı yükle
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
