@@ -13,6 +13,7 @@ using Application.Features.Slider.Rules;
 using Application.Features.Users.Rules;
 using Application.Features.Contact.Rules;
 using Application.Features.Product.Rules;
+using Application.Features.ProductSlider.Rules;
 using Application.Features.Service.Rules;
 using Application.Features.SiteIdentity.Rules;
 using Application.Features.SubCategory.Rules;
@@ -34,6 +35,7 @@ namespace Application
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ProductBusinessRules>();
+            services.AddScoped<ProductSliderBusinessRules>();
             services.AddScoped<ContactBusinessRules>();
             services.AddScoped<CategoryBusinessRules>();
             services.AddScoped<SubCategoryBusinessRules>();

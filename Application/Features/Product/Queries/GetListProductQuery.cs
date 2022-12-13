@@ -27,10 +27,10 @@ namespace Application.Features.Product.Queries
             {
                 IPaginate<Domain.Entities.Product> productAsync =await  _repository.GetListAsync(
                     include: m => m
-                        .Include(m => m.User)
                         .Include(m => m.Categories)
                         .Include(m => m.SubCategories)
-                       /* .Include(m => m.Comments)*/,
+                        .Include(m => m.ProductSliders)
+                        .Include(m => m.Comments),
                     index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
 

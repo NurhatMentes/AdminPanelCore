@@ -26,6 +26,8 @@ namespace Application.Features.Product.Profiles
                 .ForMember(p => p.UserName, opt => opt.MapFrom(c => c.User.FirstName + " " + c.User.LastName))
                 .ForMember(p => p.EmendatorAdminName, opt => opt.MapFrom(c => c.User.FirstName + " " + c.User.LastName))
                 .ForMember(p => p.ProductId, opt => opt.MapFrom(c => c.Id))
+                .ForMember(p => p.ProductSliders, opt => opt.MapFrom(c => c.ProductSliders))
+                .ForMember(p => p.Comment, opt => opt.MapFrom(c => c.Comments))
                 .ForMember(p => p.SubCategoryName, opt => opt.MapFrom(c => c.SubCategories.SubCategoryName))
                 .ForMember(p => p.CategoryName, opt => opt.MapFrom(c => c.Categories.CategoryName)).ReverseMap();
             CreateMap<IPaginate<Domain.Entities.Product>, ProductListModel>().ReverseMap();

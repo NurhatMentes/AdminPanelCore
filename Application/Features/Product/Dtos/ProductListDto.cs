@@ -1,4 +1,6 @@
-﻿namespace Application.Features.Product.Dtos
+﻿using Domain.Entities;
+
+namespace Application.Features.Product.Dtos
 {
     public class ProductListDto
     {
@@ -7,6 +9,8 @@
         public string EmendatorAdminName { get; set; }
         public string? SubCategoryName { get; set; }
         public string CategoryName { get; set; }
+        public IList<string> ProductSliders { get; set; }
+        public IList<string> Comment { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
         public double? OldPrice { get; set; }
