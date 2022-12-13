@@ -8,16 +8,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Services.AuthService;
 using Application.Auth.Rules;
 using Application.Features.AboutUs.Rules;
-using Application.Features.Category.Rules;
-using Application.Features.Slider.Rules;
-using Application.Features.Users.Rules;
+using Application.Features.Categories.Rules;
+using Application.Features.Sliders.Rules;
+using Application.Features.Userss.Rules;
 using Application.Features.Contact.Rules;
-using Application.Features.Product.Rules;
-using Application.Features.ProductSlider.Rules;
-using Application.Features.Service.Rules;
+using Application.Features.Products.Rules;
+using Application.Features.ProductSliders.Rules;
+using Application.Features.Services.Rules;
 using Application.Features.SiteIdentity.Rules;
-using Application.Features.SubCategory.Rules;
-using Application.Features.TablesLog.Rules;
+using Application.Features.SubCategories.Rules;
+using Application.Features.TablesLogs.Rules;
 using Application.Services.FileService;
 
 namespace Application

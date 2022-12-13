@@ -1,8 +1,8 @@
-﻿using Application.Features.ProductSlider.Commands.CreateProductSlider;
-using Application.Features.ProductSlider.Commands.UpdateProductSlider;
-using Application.Features.ProductSlider.Dtos;
-using Application.Features.ProductSlider.Models;
-using Application.Features.ProductSlider.Queries;
+﻿using Application.Features.ProductSliders.Commands.CreateProductSlider;
+using Application.Features.ProductSliders.Commands.UpdateProductSlider;
+using Application.Features.ProductSliders.Dtos;
+using Application.Features.ProductSliders.Models;
+using Application.Features.ProductSliders.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 

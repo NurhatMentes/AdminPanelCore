@@ -1,7 +1,7 @@
-﻿using Application.Features.User.Commands.UpdateUser;
-using Application.Features.User.Dtos;
-using Application.Features.User.Models;
-using Application.Features.User.Queries;
+﻿using Application.Features.Users.Commands.UpdateUser;
+using Application.Features.Users.Dtos;
+using Application.Features.Users.Models;
+using Application.Features.Users.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 

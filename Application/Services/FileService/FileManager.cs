@@ -101,15 +101,15 @@ namespace Application.Services.FileService
             }
 
             //dosya adını uzantısız şekilde alır
-            var pdfName = Path.GetFileName(file.FileName);
+            //var pdfName = Path.GetFileName(file.FileName);
 
             //dosya konumu bulunmuyorsa dosya konumu oluşturur
             Directory.CreateDirectory("wwwroot\\Pdfs\\" + fileName);
 
             // Dosya yolunu belirle
-            //var filePath = Path.Combine("wwwroot\\Pdfs\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".pdf");
+            var filePath = Path.Combine("wwwroot\\Pdfs\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".pdf");
 
-            var filePath = Path.Combine(_hostingEnv.WebRootPath,"Pdfs\\"+fileName, pdfName);
+            //var filePath = Path.Combine(_hostingEnv.WebRootPath,"Pdfs\\"+fileName, pdfName);
 
             if (File.Exists(filePath))
             {
