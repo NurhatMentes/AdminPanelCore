@@ -1,8 +1,8 @@
-﻿using Application.Features.Category.Commands.CreateCategory;
-using Application.Features.Category.Commands.UpdateCategory;
-using Application.Features.Category.Dtos;
-using Application.Features.Category.Models;
-using Application.Features.Category.Queries;
+﻿using Application.Features.Categories.Commands.CreateCategory;
+using Application.Features.Categories.Commands.UpdateCategory;
+using Application.Features.Categories.Dtos;
+using Application.Features.Categories.Models;
+using Application.Features.Categories.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 

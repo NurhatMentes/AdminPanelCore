@@ -1,8 +1,8 @@
-﻿using Application.Features.SubCategory.Commands.CreateSubCategory;
-using Application.Features.SubCategory.Commands.UpdateSubCategory;
-using Application.Features.SubCategory.Dtos;
-using Application.Features.SubCategory.Models;
-using Application.Features.SubCategory.Queries;
+﻿using Application.Features.SubCategories.Commands.CreateSubCategory;
+using Application.Features.SubCategories.Commands.UpdateSubCategory;
+using Application.Features.SubCategories.Dtos;
+using Application.Features.SubCategories.Models;
+using Application.Features.SubCategories.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,8 +1,8 @@
-﻿using Application.Features.Slider.Commands.CreateSlider;
-using Application.Features.Slider.Commands.UpdateSlider;
-using Application.Features.Slider.Dtos;
-using Application.Features.Slider.Models;
-using Application.Features.Slider.Queries;
+﻿using Application.Features.Sliders.Commands.CreateSlider;
+using Application.Features.Sliders.Commands.UpdateSlider;
+using Application.Features.Sliders.Dtos;
+using Application.Features.Sliders.Models;
+using Application.Features.Sliders.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 

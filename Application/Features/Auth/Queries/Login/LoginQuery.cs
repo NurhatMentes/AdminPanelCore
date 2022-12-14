@@ -1,5 +1,4 @@
-﻿
-using Application.Auth.Dtos;
+﻿using Application.Auth.Dtos;
 using Application.Auth.Rules;
 using Application.Services.Repositories;
 using Core.Security.Hashing;

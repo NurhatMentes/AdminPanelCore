@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.AboutUs.Commands.CreateAboutUs;
-using Application.Features.AboutUs.Dtos;
+﻿using Application.Features.AboutUs.Dtos;
 using Application.Features.AboutUs.Rules;
-using Application.Features.Contact.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;

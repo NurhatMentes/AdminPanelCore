@@ -1,5 +1,5 @@
-﻿using Application.Features.TablesLog.Commands.CreateTablesLog;
-using Application.Features.TablesLog.Dtos;
+﻿using Application.Features.TablesLogs.Commands.CreateTablesLog;
+using Application.Features.TablesLogs.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers

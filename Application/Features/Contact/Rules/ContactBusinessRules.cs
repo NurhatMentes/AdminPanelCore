@@ -1,5 +1,4 @@
-﻿
-using Application.Features.Contact.Constants;
+﻿using Application.Features.Contact.Constants;
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 
@@ -19,7 +18,7 @@ namespace Application.Features.Contact.Rules
         public async Task UserShouldExistWhenRequested(int userId)
         {
             var user = await _userRepository.GetAsync(a => a.Id == userId);
-            if (user == null) throw new BusinessException(Messages.ShouldExistWhenRequested);
+            if (user == null) throw new BusinessException(Messages.UserShouldExistWhenRequested);
         }
     }
 }

@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Pdfs\" />
     <Folder Include="wwwroot\Uploads\Services\" />
   </ItemGroup>
 

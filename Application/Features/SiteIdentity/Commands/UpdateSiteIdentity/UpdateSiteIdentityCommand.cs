@@ -1,6 +1,7 @@
 ﻿using Application.Features.SiteIdentity.Dtos;
-using Application.Features.Slider.Rules;
-using Application.Services.ImageService;
+using Application.Features.SiteIdentity.Rules;
+using Application.Features.Sliders.Rules;
+using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
@@ -23,9 +24,9 @@ namespace Application.Features.SiteIdentity.Commands.UpdateSiteIdentity
             ISiteIdentityRepository _repository;
             IMapper _mapper;
             IFileService _imageService;
-            private readonly SliderBusinessRules _businessRules;
+            private readonly SiteIdentityBusinessRules _businessRules;
 
-            public UpdateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SliderBusinessRules businessRules)
+            public UpdateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SiteIdentityBusinessRules businessRules)
             {
                 _repository = repository;
                 _mapper = mapper;

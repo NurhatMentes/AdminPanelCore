@@ -1,8 +1,8 @@
-﻿using Application.Features.Service.Commands.CreateService;
-using Application.Features.Service.Commands.UpdateService;
-using Application.Features.Service.Dtos;
-using Application.Features.Service.Models;
-using Application.Features.Service.Queries;
+﻿using Application.Features.Services.Commands.CreateService;
+using Application.Features.Services.Commands.UpdateService;
+using Application.Features.Services.Dtos;
+using Application.Features.Services.Models;
+using Application.Features.Services.Queries;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 
