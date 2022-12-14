@@ -12,7 +12,7 @@ public class Comment : Entity
     public bool Confirmation { get; set; }
     public DateTime? Date { get; set; }
 
-    public virtual Blogs Blogs { get; set; }
+    public virtual Blog Blogs { get; set; }
     public virtual Product Products { get; set; }
 
     public Comment()

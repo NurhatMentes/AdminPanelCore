@@ -3,6 +3,6 @@ using Domain.Entities;
 
 namespace Application.Services.Repositories;
 
-public interface IBlogRepository : IAsyncRepository<Blogs>, IRepository<Blogs>
+public interface IBlogRepository : IAsyncRepository<Blog>, IRepository<Blog>
 {
 }

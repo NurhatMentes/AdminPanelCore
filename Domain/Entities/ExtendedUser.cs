@@ -8,7 +8,7 @@ public class ExtendedUser: User
     {
   
         AboutUs = new HashSet<AboutUs>();
-        Blogs = new HashSet<Blogs>();
+        Blogs = new HashSet<Blog>();
         Categories = new HashSet<Category>();
         Contact = new HashSet<Contact>();
         HomeVideo = new HashSet<HomeVideo>();
@@ -24,7 +24,7 @@ public class ExtendedUser: User
     public string Phone { get; set; }
 
     public virtual ICollection<AboutUs> AboutUs { get; set; }
-    public virtual ICollection<Blogs> Blogs { get; set; }
+    public virtual ICollection<Blog> Blogs { get; set; }
     public virtual ICollection<Category> Categories { get; set; }
     public virtual ICollection<Contact> Contact { get; set; }
     public virtual ICollection<HomeVideo> HomeVideo { get; set; }

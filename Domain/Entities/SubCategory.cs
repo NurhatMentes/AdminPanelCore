@@ -11,7 +11,7 @@ public class SubCategory : Entity
     public string ImgUrl { get; set; }
     public bool State { get; set; }
 
-    public virtual ICollection<Blogs> Blogs { get; set; }
+    public virtual ICollection<Blog> Blogs { get; set; }
     public virtual ICollection<Product> Products { get; set; }
     public virtual Category Categories { get; set; }
     public virtual ExtendedUser User { get; set; }
@@ -29,7 +29,7 @@ public class SubCategory : Entity
     public SubCategory()
     {
         State = true;
-        Blogs = new HashSet<Blogs>();
+        Blogs = new HashSet<Blog>();
         Products = new HashSet<Product>();
     }
 }
