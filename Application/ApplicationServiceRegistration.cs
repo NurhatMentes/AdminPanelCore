@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Services.AuthService;
 using Application.Auth.Rules;
 using Application.Features.AboutUs.Rules;
+using Application.Features.Blogs.Rules;
 using Application.Features.Categories.Rules;
 using Application.Features.Sliders.Rules;
 using Application.Features.Userss.Rules;
@@ -33,6 +34,7 @@ namespace Application
 
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
+            services.AddScoped<BlogBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ProductBusinessRules>();
             services.AddScoped<ProductSliderBusinessRules>();

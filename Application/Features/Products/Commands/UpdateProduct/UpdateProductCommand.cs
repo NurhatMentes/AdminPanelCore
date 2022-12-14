@@ -77,7 +77,6 @@ public class UpdateProductCommand : IRequest<UpdatedProductDto>
             };
           
 
-            //Product mapped = _mapper.Map<Product>(product);
             var updated = await _repository.UpdateAsync(product);
             var updatedDto = _mapper.Map<UpdatedProductDto>(updated);
 

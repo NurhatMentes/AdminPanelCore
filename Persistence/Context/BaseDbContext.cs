@@ -11,7 +11,7 @@ namespace Persistence.Context
 
 
         public virtual DbSet<AboutUs> AboutUs { get; set; }
-        public virtual DbSet<Blogs> Blogs { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
@@ -87,7 +87,7 @@ namespace Persistence.Context
                 a.HasOne(x => x.User);
             });
 
-            modelBuilder.Entity<Blogs>(b =>
+            modelBuilder.Entity<Blog>(b =>
             {
                 b.ToTable("Blogs").HasKey(k => k.Id);
                 b.Property(p => p.Id).HasColumnName("BlogId");
@@ -97,6 +97,7 @@ namespace Persistence.Context
                 b.Property(p => p.SubCategoryId).HasColumnName("SubCategoryId");
                 b.Property(p => p.Title).HasColumnName("Title");
                 b.Property(p => p.Content).HasColumnName("Content");
+                b.Property(p => p.Keywords).HasColumnName("Keywords");
                 b.Property(p => p.ImgUrl).HasColumnName("ImgUrl");
                 b.Property(p => p.State).HasColumnName("State");
                 b.HasOne(p => p.Categories);

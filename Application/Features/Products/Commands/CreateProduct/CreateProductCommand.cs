@@ -19,10 +19,10 @@ namespace Application.Features.Products.Commands.CreateProduct
         public double Price { get; set; }
         public int? Stock { get; set; }
         public string Color { get; set; }
-        public IFormFile ImgFile { get; set; }
-        public IFormFile? File { get; set; }
         public string Content { get; set; }
         public string Keywords { get; set; }
+        public IFormFile ImgFile { get; set; }
+        public IFormFile? File { get; set; }
 
         public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreatedProductDto>
         {

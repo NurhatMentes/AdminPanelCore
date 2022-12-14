@@ -5,7 +5,7 @@ using Persistence.Context;
 
 namespace Persistence.Repositories;
 
-public class BlogRepository : EfRepositoryBase<Blogs, BaseDbContext>, IBlogRepository
+public class BlogRepository : EfRepositoryBase<Blog, BaseDbContext>, IBlogRepository
 {
     public BlogRepository(BaseDbContext context) : base(context)
     {

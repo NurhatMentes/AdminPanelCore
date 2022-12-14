@@ -13,7 +13,7 @@ public class Category : Entity
     public bool State { get; set; }
 
  
-    public virtual ICollection<Blogs> Blogs { get; set; }
+    public virtual ICollection<Blog> Blogs { get; set; }
     public virtual ICollection<Product> Products { get; set; }
     public virtual ICollection<SubCategory> SubCategories { get; set; }
     public virtual ExtendedUser User { get; set; }
@@ -21,7 +21,7 @@ public class Category : Entity
     public Category()
     {
         State = true;
-        Blogs = new HashSet<Blogs>();
+        Blogs = new HashSet<Blog>();
         Products = new HashSet<Product>();
         SubCategories = new HashSet<SubCategory>();
     }
