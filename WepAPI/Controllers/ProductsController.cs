@@ -34,5 +34,13 @@ namespace WepAPI.Controllers
             ProductListModel result = await Mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("state")]
+        public async Task<IActionResult> GetListByState([FromQuery] PageRequest pageRequest,bool ProductState)
+        {
+            GetListByStateProductQuery query = new GetListByStateProductQuery { PageRequest = pageRequest,ProductState = ProductState};
+            ProductListModel result = await Mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

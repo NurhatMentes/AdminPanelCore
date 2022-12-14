@@ -37,6 +37,8 @@ namespace Persistence.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.UseQueryTrackingBehavior(queryTrackingBehavior:QueryTrackingBehavior.NoTracking);
             //if (!optionsBuilder.IsConfigured)
             //    base.OnConfiguring(
             //        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Server=(localdb)\\MSSQLLocalDB;Database=AdminPanelCoreDb; Trusted_Connection=True;")));

@@ -12,7 +12,7 @@ namespace Application.Features.Categories.Commands.CreateCategory
     public class CreateCategoryCommand:IRequest<CreatedCategoryDto>
     {
         public int UserId { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public bool State { get; set; }
@@ -35,11 +35,12 @@ namespace Application.Features.Categories.Commands.CreateCategory
             public async Task<CreatedCategoryDto> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _businessRules.UserShouldExistWhenRequested(request.UserId);
-                await _imageService.ImageUpload(request.File, "Categories");
+                if (request.File != null)
+                    await _imageService.ImageUpload(request.File, "Categories");
 
                 Category category = new Category()
                 {
-                    ImgUrl = "wwwroot\\Uploads\\Categories\\" + request.File.FileName.Split(".")[0] + ".webp",
+                    ImgUrl = request.File is null ? "Yok" : "wwwroot\\Uploads\\Categories\\" + request.File.FileName.Split(".")[0] + ".webp",
                     UserId = request.UserId,
                     Description = request.Description,
                     EmendatorAdminId = null,

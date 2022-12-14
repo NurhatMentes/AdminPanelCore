@@ -13,7 +13,7 @@ public class Product : Entity
     public double? OldPrice { get; set; }
     public int? Stock { get; set; }
     public string Color { get; set; }
-    public string File { get; set; }
+    public string? File { get; set; }
     public string Content { get; set; }
     public DateTime? UpdateDate { get; set; }
     public string Keywords { get; set; }
@@ -26,7 +26,7 @@ public class Product : Entity
     public virtual ExtendedUser User { get; set; }
     public virtual ICollection<ProductSlider> ProductSliders { get; set; }
 
-    public Product(int id, DateTime creationTime, int categoryId, int? subCategoryId, int? userId, string title, double price, double? oldPrice, int? stock, string color, string file, string content, DateTime? updateDate, int? emendatorAdminId, string tag, string imgUrl, bool state) : base(id, creationTime)
+    public Product(int id, DateTime creationTime, int categoryId, int? subCategoryId, int? userId, string title, double price, double? oldPrice, int? stock, string color, string file, string content, DateTime? updateDate, int? emendatorAdminId, string keywords, string imgUrl, bool state) : base(id, creationTime)
     {
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
@@ -40,7 +40,7 @@ public class Product : Entity
         Content = content;
         UpdateDate = updateDate;
         EmendatorAdminId = emendatorAdminId;
-        Keywords = tag;
+        Keywords = keywords;
         ImgUrl = imgUrl;
         State = state;
     }

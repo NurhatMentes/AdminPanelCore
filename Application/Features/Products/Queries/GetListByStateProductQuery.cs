@@ -3,31 +3,37 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries
 {
-    public class GetListProductQuery : IRequest<ProductListModel>
+    public class GetListByStateProductQuery : IRequest<ProductListModel>
     {
         public PageRequest PageRequest { get; set; }
+        public bool ProductState { get; set; }
 
-        public class GetListProductQueryHandler : IRequestHandler<GetListProductQuery, ProductListModel>
+
+        public class GetListByStateProductQueryHandler : IRequestHandler<GetListByStateProductQuery, ProductListModel>
         {
-             private readonly IProductRepository _repository;
-             private readonly IMapper _mapper;
+            private readonly IProductRepository _repository;
+            private readonly IMapper _mapper;
 
-            public GetListProductQueryHandler(IProductRepository modelRepository, IMapper mapper)
+            public GetListByStateProductQueryHandler(IProductRepository modelRepository, IMapper mapper)
             {
                 _repository = modelRepository;
                 _mapper = mapper;
             }
 
-            public async Task<ProductListModel> Handle(GetListProductQuery request, CancellationToken cancellationToken)
+            public async Task<ProductListModel> Handle(GetListByStateProductQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<Product> productAsync =await  _repository.GetListAsync(
+                IPaginate<Product> productAsync = await _repository.GetListAsync(product => product.State==request.ProductState,
                     include: m => m
                         .Include(m => m.User)
                         .Include(m => m.Categories)

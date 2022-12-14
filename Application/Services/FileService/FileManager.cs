@@ -85,10 +85,6 @@ namespace Application.Services.FileService
 
         public async Task<string> FileUpload(IFormFile file, string fileName)
         {
-            if (file == null || file.Length == 0)
-            {
-                throw new Exception("Dosya yüklenemedi");
-            }
 
             if (file.ContentType != "application/pdf")
             {

@@ -16,13 +16,15 @@ namespace Application.Features.Products.Profiles
             CreateMap<Product, CreatedProductDto>().ForMember(p => p.UserId, opt => opt.MapFrom(c => c.User.Id)).ReverseMap();
 
             CreateMap<Product, UpdateProductCommand>()
+                .ForMember(p=>p.ProductId, opt=>opt.MapFrom(c=>c.Id))
                 .ForMember(p => p.UserId, opt => opt.MapFrom(c => c.User.Id))
+                .ForMember(p => p.CategoryId, opt => opt.MapFrom(c => c.Categories.Id))
                 .ForMember(p => p.EmendatorAdminId, opt => opt.MapFrom(c => c.User.Id)).ReverseMap();
             CreateMap<Product, UpdatedProductDto>()
+                .ForMember(p => p.ProductId, opt => opt.MapFrom(c => c.Id))
                 .ForMember(p => p.UserId, opt => opt.MapFrom(c => c.User.Id))
-                .ForMember(p => p.ImgUrl, opt => opt.MapFrom(c => c.ImgUrl))
-                .ForMember(p => p.Id, opt => opt.MapFrom(c => c.Id)).ReverseMap();
-
+                .ForMember(p => p.CategoryId, opt => opt.MapFrom(c => c.Categories.Id))
+                .ForMember(p => p.EmendatorAdminId, opt => opt.MapFrom(c => c.User.Id)).ReverseMap();
             CreateMap<Product, ProductListDto>()
                 .ForMember(p => p.UserName, opt => opt.MapFrom(c => c.User.FirstName + " " + c.User.LastName))
                 .ForMember(p => p.EmendatorAdminName, opt => opt.MapFrom(c => c.User.FirstName + " " + c.User.LastName))

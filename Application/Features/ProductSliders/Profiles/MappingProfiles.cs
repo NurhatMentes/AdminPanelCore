@@ -24,7 +24,7 @@ namespace Application.Features.ProductSliders.Profiles
                 .ForMember(p => p.ProductId, opt => opt.MapFrom(c => c.Product.Id)).ReverseMap();
 
             CreateMap<ProductSlider, ProductSliderListDto>()
-                .ForMember(p => p.ProductName, opt => opt.MapFrom(c => c.Product.Title)).ReverseMap();
+                .ForMember(p => p.Id, opt => opt.MapFrom(c => c.Id)).ReverseMap();
             CreateMap<IPaginate<ProductSlider>, ProductSliderListModel>().ReverseMap();
         }
     }

@@ -9,8 +9,6 @@ namespace Application.Features.Products.Dtos
         public string EmendatorAdminName { get; set; }
         public string? SubCategoryName { get; set; }
         public string CategoryName { get; set; }
-        //public IList<string> ProductSliders { get; set; }
-        //public IList<string> Comments { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
         public double? OldPrice { get; set; }

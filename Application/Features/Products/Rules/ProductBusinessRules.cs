@@ -9,12 +9,14 @@ namespace Application.Features.Products.Rules
         private readonly IProductRepository _repository;
         private readonly IUserRepository _userRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ISubCategoryRepository _subCategoryRepository;
 
-        public ProductBusinessRules(IUserRepository userRepository, ICategoryRepository categoryRepository, IProductRepository repository)
+        public ProductBusinessRules(IUserRepository userRepository, ICategoryRepository categoryRepository, IProductRepository repository, ISubCategoryRepository subCategoryRepository)
         {
             _userRepository = userRepository;
             _categoryRepository = categoryRepository;
             _repository = repository;
+            _subCategoryRepository = subCategoryRepository;
         }
 
         public async Task UserShouldExistWhenRequested(int userId)
@@ -26,6 +28,12 @@ namespace Application.Features.Products.Rules
         public async Task CategoryShouldExistWhenRequested(int categoryId)
         {
             var user = await _categoryRepository.GetAsync(a => a.Id == categoryId);
+            if (user == null) throw new BusinessException(Messages.CategoryShouldExistWhenRequested);
+        }
+
+        public async Task SubCategoryShouldExistWhenRequested(int? subCategoryId)
+        {
+            var user = await _categoryRepository.GetAsync(a => a.Id == subCategoryId);
             if (user == null) throw new BusinessException(Messages.CategoryShouldExistWhenRequested);
         }
     }
