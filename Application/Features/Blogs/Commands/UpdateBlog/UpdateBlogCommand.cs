@@ -51,23 +51,21 @@ namespace Application.Features.Blogs.Commands.UpdateBlog
                     await _businessRules.SubCategoryShouldExistWhenRequested(request.SubCategoryId);
                 await _fileService.ImageUpload(request.File, "Blogs");
 
+                var entity = await _repository.GetAsync(p => p.Id == request.BlogId);
 
+       
+                entity.ImgUrl = "wwwroot\\Uploads\\Blogs\\" + request.File.FileName.Split(".")[0] + ".webp";
+                entity.UserId = request.UserId;
+                entity.CategoryId = request.CategoryId;
+                entity.SubCategoryId = request.SubCategoryId ?? 1;
+                entity.EmendatorAdminId = request.EmendatorAdminId;
+                entity.State = request.State;
+                entity.Title = request.Title;
+                entity.Content = request.Content;
+                entity.Keywords = request.Keywords;
+         
 
-                Blog blog = new Blog()
-                {
-                    Id = request.BlogId,
-                    ImgUrl = "wwwroot\\Uploads\\Blogs\\" + request.File.FileName.Split(".")[0] + ".webp",
-                    UserId = request.UserId,
-                    CategoryId = request.CategoryId,
-                    SubCategoryId = request.SubCategoryId ?? 1,
-                    EmendatorAdminId = request.EmendatorAdminId,
-                    State = request.State,
-                    Title = request.Title,
-                    Content = request.Content,
-                    Keywords = request.Keywords
-                };
-
-                Blog updated = await _repository.UpdateAsync(blog);
+                Blog updated = await _repository.UpdateAsync(entity);
                 UpdatedBlogDto updatedDto = _mapper.Map<UpdatedBlogDto>(updated);
 
                 return updatedDto;

@@ -19,6 +19,7 @@ namespace Persistence
 
             services.AddScoped<IAboutUsRepository, AboutUsRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IHomeVideoRepository, HomeVideoRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();

@@ -121,5 +121,43 @@ namespace Application.Services.FileService
             
             return "";
         }
+
+        public async Task<string> VideoUpload(IFormFile file, string fileName)
+        {
+            if (file.ContentType != "video/mp4")
+            {
+                throw new Exception("Geçersiz dosya türü. mp4 dosyası yükleyiniz");
+            }
+
+            if (Path.GetExtension(file.FileName) != ".mp4")
+            {
+                throw new InvalidOperationException("Geçersiz dosya uzantısı. Lütfen sadece mp4 formatında video yükleyin.");
+            }
+
+            //dosya adını uzantısız şekilde alır
+            //var pdfName = Path.GetFileName(file.FileName);
+
+            //dosya konumu bulunmuyorsa dosya konumu oluşturur
+            Directory.CreateDirectory("wwwroot\\Videos\\" + fileName);
+
+            // Dosya yolunu belirle
+            var filePath = Path.Combine("wwwroot\\Videos\\" + fileName + "\\" + file.FileName.Split(".")[0] + ".mp4");
+
+            //var filePath = Path.Combine(_hostingEnv.WebRootPath,"Pdfs\\"+fileName, pdfName);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            // Dosyayı yükle
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+
+
+            return "";
+        }
     }
 }

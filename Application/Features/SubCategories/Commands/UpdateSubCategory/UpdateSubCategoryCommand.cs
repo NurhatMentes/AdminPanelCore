@@ -40,19 +40,16 @@ namespace Application.Features.SubCategories.Commands.UpdateSubCategory
                 await _businessRules.CategoryShouldExistWhenRequested(request.CategoryId);
                 await _imageService.ImageUpload(request.File, "SubCategories");
 
+                var entity = await _repository.GetAsync(p => p.Id == request.Id);
 
-                SubCategory slider = new SubCategory()
-                {
-                    Id = request.Id,
-                    UserId = request.UserId,
-                    ImgUrl = "wwwroot\\Uploads\\SubCategories\\" + request.File.FileName.Split(".")[0] + ".webp",
-                    SubCategoryName = request.SubCategoryName,
-                    EmendatorAdminId = request.EmendatorAdminId,
-                    State = request.State,
-                    CategoryId = request.CategoryId,
-                };
+                entity.ImgUrl = "wwwroot\\Uploads\\SubCategories\\" + request.File.FileName.Split(".")[0] + ".webp";
+                entity.SubCategoryName = request.SubCategoryName;
+                entity.EmendatorAdminId = request.EmendatorAdminId;
+                entity.State = request.State;
+                entity.CategoryId = request.CategoryId;
 
-                SubCategory mapped = _mapper.Map<SubCategory>(slider);
+
+                SubCategory mapped = _mapper.Map<SubCategory>(entity);
                 SubCategory updated = await _repository.UpdateAsync(mapped);
                 UpdatedSubCategoryDto mappedDto = _mapper.Map<UpdatedSubCategoryDto>(updated);
 

@@ -39,21 +39,17 @@ namespace Application.Features.Sliders.Commands.UpdateSlider
                 await _businessRules.UserShouldExistWhenRequested(request.EmendatorAdminId);
                 await _imageService.ImageUpload(request.File, "Sliders");
 
+                var entity = await _repository.GetAsync(p => p.Id == request.SliderId);
 
-                Slider slider = new Slider()
-                {
-                    Id = request.SliderId,
-                    UserId = request.UserId,
-                    ImgUrl = "wwwroot\\Uploads\\Sliders\\" + request.File.FileName.Split(".")[0] + ".webp",
-                    Description = request.Description,
-                    EmendatorAdminId = request.EmendatorAdminId,
-                    State = request.State,
-                    Title = request.Title,
-                };
+                entity.Id = request.SliderId;
+                entity.UserId = request.UserId;
+                entity.ImgUrl = "wwwroot\\Uploads\\Sliders\\" + request.File.FileName.Split(".")[0] + ".webp";
+                entity.Description = request.Description;
+                entity.EmendatorAdminId = request.EmendatorAdminId;
+                entity.State = request.State;
+                entity.Title = request.Title;
 
-                //request.ImgUrl = "wwwroot\\Uploads\\Sliders\\" + request.File.FileName.Split(".")[0] + ".webp";
-
-                Slider mapped = _mapper.Map<Slider>(slider);
+                Slider mapped = _mapper.Map<Slider>(entity);
                 Slider updated = await _repository.UpdateAsync(mapped);
                 UpdatedSliderDto mappedDto = _mapper.Map<UpdatedSliderDto>(updated);
 

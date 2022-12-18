@@ -52,32 +52,30 @@ public class UpdateProductCommand : IRequest<UpdatedProductDto>
             if (request.File != null)
                 await _fileService.FileUpload(request.File, "Products");
 
+
             var oldProduct = await _repository.GetAsync(p => p.Id == request.ProductId);
+            var entity = await _repository.GetAsync(p => p.Id == request.ProductId);
 
-            var product = new Product()
-            {
-                Id = request.ProductId,
-                ImgUrl = "wwwroot\\Uploads\\Products\\" + request.ImgFile.FileName.Split(".")[0] + ".webp",
-                File = request.File is null
+            entity.ImgUrl = "wwwroot\\Uploads\\Products\\" + request.ImgFile.FileName.Split(".")[0] + ".webp";
+            entity.File = request.File is null
                     ? "Yok"
-                    : "wwwroot\\Pdfs\\Products\\" + request.File.FileName.Split(".")[0] + ".pdf",
-                UserId = request.UserId,
-                CategoryId = request.CategoryId,
-                SubCategoryId = request.SubCategoryId ?? 1,
-                EmendatorAdminId = request.EmendatorAdminId,
-                State = request.State,
-                Title = request.Title,
-                Price = request.Price,
-                OldPrice = oldProduct.Price,
-                Stock = request.Stock,
-                Color = request.Color,
-                Content = request.Content,
-                UpdateDate = DateTime.UtcNow,
-                Keywords = request.Keywords
-            };
-          
+                    : "wwwroot\\Pdfs\\Products\\" + request.File.FileName.Split(".")[0] + ".pdf";
+            entity.UserId = request.UserId;
+            entity.CategoryId = request.CategoryId;
+            entity.SubCategoryId = request.SubCategoryId ?? 1;
+            entity.EmendatorAdminId = request.EmendatorAdminId;
+            entity.State = request.State;
+            entity.Title = request.Title;
+            entity.Price = request.Price;
+            entity.OldPrice = oldProduct.Price;
+            entity.Stock = request.Stock;
+            entity.Color = request.Color;
+            entity.Content = request.Content;
+            entity.UpdateDate = DateTime.UtcNow;
+            entity.Keywords = request.Keywords;
 
-            var updated = await _repository.UpdateAsync(product);
+
+            var updated = await _repository.UpdateAsync(entity);
             var updatedDto = _mapper.Map<UpdatedProductDto>(updated);
 
             return updatedDto;

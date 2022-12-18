@@ -21,6 +21,7 @@ using Application.Features.SiteIdentity.Rules;
 using Application.Features.SubCategories.Rules;
 using Application.Features.TablesLogs.Rules;
 using Application.Services.FileService;
+using Application.Features.HomeVideos.Rules;
 
 namespace Application
 {
@@ -36,6 +37,7 @@ namespace Application
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<BlogBusinessRules>();
+            services.AddScoped<HomeVideoBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ProductBusinessRules>();
             services.AddScoped<CommentBusinessRules>();

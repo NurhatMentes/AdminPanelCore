@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Categories.Commands.UpdateCategory
 {
-    public class UpdateCategoryCommand:IRequest<UpdatedCategoryDto>
+    public class UpdateCategoryCommand : IRequest<UpdatedCategoryDto>
     {
         public int Id { get; set; }
         public int? UserId { get; set; }
@@ -40,18 +40,17 @@ namespace Application.Features.Categories.Commands.UpdateCategory
                 if (request.File != null)
                     await _imageService.ImageUpload(request.File, "Categories");
 
-                Category category = new Category()
-                {
-                    Id = request.Id,
-                    ImgUrl = request.File is null ? "Yok" : "wwwroot\\Uploads\\Categories\\" + request.File.FileName.Split(".")[0] + ".webp",
-                    UserId = request.UserId,
-                    Description = request.Description,
-                    EmendatorAdminId = request.EmendatorAdminId,
-                    State = request.State,
-                    CategoryName = request.CategoryName,
-                };
+                var entity = await _repository.GetAsync(p => p.Id == request.Id);
 
-                Category updated = await _repository.UpdateAsync(category);
+                entity.ImgUrl = request.File is null ? "Yok" : "wwwroot\\Uploads\\Categories\\" + request.File.FileName.Split(".")[0] + ".webp";
+                entity.UserId = request.UserId;
+                entity.Description = request.Description;
+                entity.EmendatorAdminId = request.EmendatorAdminId;
+                entity.State = request.State;
+                entity.CategoryName = request.CategoryName;
+
+
+                Category updated = await _repository.UpdateAsync(entity);
                 UpdatedCategoryDto updatedDto = _mapper.Map<UpdatedCategoryDto>(updated);
 
                 return updatedDto;

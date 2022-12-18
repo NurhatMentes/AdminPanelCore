@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.ProductSliders.Commands.UpdateProductSlider
 {
-    public class UpdateProductSliderCommand:IRequest<UpdatedProductSliderDto>
+    public class UpdateProductSliderCommand : IRequest<UpdatedProductSliderDto>
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -36,14 +36,14 @@ namespace Application.Features.ProductSliders.Commands.UpdateProductSlider
                 await _businessRules.ProductShouldExistWhenRequested(request.ProductId);
                 await _imageService.ImageUpload(request.File, "ProductSliders");
 
-                ProductSlider productSlider = new ProductSlider()
-                {
-                    ImgUrl = "wwwroot\\Uploads\\ProductSliders\\" + request.File.FileName.Split(".")[0] + ".webp",
-                    ProductId = request.ProductId,
-                    State = request.State,
-                };
 
-                ProductSlider updated = await _repository.UpdateAsync(productSlider);
+                var entity = await _repository.GetAsync(p => p.Id == request.Id);
+
+                entity.ImgUrl = "wwwroot\\Uploads\\ProductSliders\\" + request.File.FileName.Split(".")[0] + ".webp";
+                entity.ProductId = request.ProductId;
+                entity.State = request.State;
+
+                ProductSlider updated = await _repository.UpdateAsync(entity);
                 UpdatedProductSliderDto updatedDto = _mapper.Map<UpdatedProductSliderDto>(updated);
 
                 return updatedDto;
