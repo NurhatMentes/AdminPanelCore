@@ -7,7 +7,7 @@ using Application.Features.Contact.Commands.UpdateContact;
 
 namespace Application.Features.Contact.Profiles
 {
-    public class MappingProfiles: Profile
+    public class MappingProfiles : Profile
     {
         public MappingProfiles()
         {

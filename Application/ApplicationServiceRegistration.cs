@@ -10,6 +10,7 @@ using Application.Auth.Rules;
 using Application.Features.AboutUs.Rules;
 using Application.Features.Blogs.Rules;
 using Application.Features.Categories.Rules;
+using Application.Features.Comments.Rules;
 using Application.Features.Sliders.Rules;
 using Application.Features.Userss.Rules;
 using Application.Features.Contact.Rules;
@@ -37,6 +38,7 @@ namespace Application
             services.AddScoped<BlogBusinessRules>();
             services.AddScoped<SliderBusinessRules>();
             services.AddScoped<ProductBusinessRules>();
+            services.AddScoped<CommentBusinessRules>();
             services.AddScoped<ProductSliderBusinessRules>();
             services.AddScoped<ContactBusinessRules>();
             services.AddScoped<CategoryBusinessRules>();

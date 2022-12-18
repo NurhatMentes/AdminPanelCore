@@ -10,15 +10,15 @@ public class Comment : Entity
     public string Email { get; set; }
     public string CommentContent { get; set; }
     public bool Confirmation { get; set; }
-    public DateTime? Date { get; set; }
 
     public virtual Blog Blogs { get; set; }
     public virtual Product Products { get; set; }
 
     public Comment()
     {
+        Confirmation = false;
     }
-    public Comment(int? blogId, int? productId, string firstLastName, string email, string commentContent, bool confirmation, DateTime? date)
+    public Comment(int? blogId, int? productId, string firstLastName, string email, string commentContent, bool confirmation)
     {
         BlogId = blogId;
         ProductId = productId;
@@ -26,7 +26,6 @@ public class Comment : Entity
         Email = email;
         CommentContent = commentContent;
         Confirmation = confirmation;
-        Date = date;
     }
 
 }

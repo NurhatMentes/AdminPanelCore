@@ -38,7 +38,8 @@ namespace Persistence.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseQueryTrackingBehavior(queryTrackingBehavior:QueryTrackingBehavior.NoTracking);
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+            //optionsBuilder.UseQueryTrackingBehavior(queryTrackingBehavior:QueryTrackingBehavior.NoTracking);
             //if (!optionsBuilder.IsConfigured)
             //    base.OnConfiguring(
             //        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Server=(localdb)\\MSSQLLocalDB;Database=AdminPanelCoreDb; Trusted_Connection=True;")));
@@ -63,7 +64,7 @@ namespace Persistence.Context
                 a.HasMany(p => p.AboutUs);
                 a.HasMany(p => p.RefreshTokens);
                 a.HasMany(p => p.UserOperationClaims);
-                a.HasMany(p => p.Blogs);
+                a.HasMany(p => p.Blog);
                 a.HasMany(p => p.Categories);
                 a.HasMany(p => p.Contact);
                 a.HasMany(p => p.HomeVideo);
@@ -132,7 +133,6 @@ namespace Persistence.Context
                 b.Property(p => p.Email).HasColumnName("Email");
                 b.Property(p => p.CommentContent).HasColumnName("CommentContent");
                 b.Property(p => p.Confirmation).HasColumnName("Confirmation");
-                b.Property(p => p.Date).HasColumnName("Date");
                 b.HasOne(p => p.Blogs);
                 b.HasOne(p => p.Products);
             });
