@@ -8,7 +8,7 @@ namespace Application.Features.Auth.Commands.Register
         public RegisterCommandValidator()
         {
             RuleFor(u => u.UserForRegisterDto.Password).MinimumLength(7).NotEmpty().WithMessage("Parola alanı boş geçilemez!")
-                .Must(IsPasswordValid).WithMessage("Parolanız en az yedi karakter, en az bir harf ve bir sayı içermelidir!"); ;
+                .Must(IsPasswordValid).WithMessage("Parolanız en az yedi karakter, en az bir harf ve bir sayı içermelidir! Parolanız özel karakterler içeremez!"); ;
             RuleFor(u => u.UserForRegisterDto.Email).EmailAddress<RegisterCommand>();
             RuleFor(u => u.UserForRegisterDto.FirstName).NotNull().MaximumLength(50).WithMessage("Ad alanı 50 karakteri geçemez!"); ;
             RuleFor(u => u.UserForRegisterDto.LastName).NotNull().MaximumLength(50).WithMessage("Soyad alanı 50 karakteri geçemez!"); ;

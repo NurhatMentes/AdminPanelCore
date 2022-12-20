@@ -1,14 +1,16 @@
 ﻿using Application.Features.Contact.Models;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
 namespace Application.Features.Contact.Queries
 {
-    public class GetListContactQuery:IRequest<ContactListModel>
+    public class GetListContactQuery:IRequest<ContactListModel>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public PageRequest PageRequest { get; set; }
 
         public class GetListContactQueryHandler : IRequestHandler<GetListContactQuery, ContactListModel>

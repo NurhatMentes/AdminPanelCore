@@ -10,6 +10,7 @@ using Application.Auth.Rules;
 using Application.Features.AboutUs.Rules;
 using Application.Features.Blogs.Rules;
 using Application.Features.Categories.Rules;
+using Application.Features.Claims.Rules;
 using Application.Features.Comments.Rules;
 using Application.Features.Sliders.Rules;
 using Application.Features.Userss.Rules;
@@ -22,6 +23,8 @@ using Application.Features.SubCategories.Rules;
 using Application.Features.TablesLogs.Rules;
 using Application.Services.FileService;
 using Application.Features.HomeVideos.Rules;
+using Application.Features.UserOperationClaims.Rules;
+
 
 namespace Application
 {
@@ -49,6 +52,8 @@ namespace Application
             services.AddScoped<SiteIdentityBusinessRules>();
             services.AddScoped<TablesLogBusinessRules>();
             services.AddScoped<ServiceBusinessRules>();
+            services.AddScoped<OperationClaimBusinessRules>();
+            services.AddScoped<UserOperationClaimBusinessRules>();
 
             services.AddTransient<IAuthService, AuthManager>();
             services.AddTransient<IFileService, FileManager>();

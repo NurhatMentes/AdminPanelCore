@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-using Core.CrossCuttingConcerns.Exceptions;
+﻿using Core.CrossCuttingConcerns.Exceptions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using System.IO;
 
 namespace Application.Services.FileService
 {
@@ -134,8 +131,6 @@ namespace Application.Services.FileService
                 throw new InvalidOperationException("Geçersiz dosya uzantısı. Lütfen sadece mp4 formatında video yükleyin.");
             }
 
-            //dosya adını uzantısız şekilde alır
-            //var pdfName = Path.GetFileName(file.FileName);
 
             //dosya konumu bulunmuyorsa dosya konumu oluşturur
             Directory.CreateDirectory("wwwroot\\Videos\\" + fileName);

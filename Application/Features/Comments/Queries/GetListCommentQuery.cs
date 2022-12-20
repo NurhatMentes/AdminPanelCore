@@ -6,11 +6,13 @@ using AutoMapper;
 using Domain.Entities;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Comments.Queries
 {
-    public class GetListCommentQuery:IRequest<CommentListModel>
+    public class GetListCommentQuery:IRequest<CommentListModel>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public PageRequest PageRequest { get; set; }
 
         public class GetListCommentQueryHandler : IRequestHandler<GetListCommentQuery, CommentListModel>

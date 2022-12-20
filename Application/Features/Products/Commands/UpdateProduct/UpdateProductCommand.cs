@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Application.Features.Products.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Products.Commands.UpdateProduct;
 
-public class UpdateProductCommand : IRequest<UpdatedProductDto>
+public class UpdateProductCommand : IRequest<UpdatedProductDto>, ISecuredRequest
 {
+    public string[] Roles => new[] { "0", "1", "2" };
     public int ProductId { get; set; }
     public int CategoryId { get; set; }
     public int? SubCategoryId { get; set; }

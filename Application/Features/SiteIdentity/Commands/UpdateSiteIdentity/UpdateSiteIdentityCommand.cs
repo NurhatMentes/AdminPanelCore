@@ -4,13 +4,15 @@ using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.SiteIdentity.Commands.UpdateSiteIdentity
 {
-    public class UpdateSiteIdentityCommand : IRequest<UpdatedSiteIdentityDto>
+    public class UpdateSiteIdentityCommand : IRequest<UpdatedSiteIdentityDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1" };
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int EmendatorAdminId { get; set; }

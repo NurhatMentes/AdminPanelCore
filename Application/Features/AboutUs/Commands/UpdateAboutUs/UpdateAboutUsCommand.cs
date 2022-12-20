@@ -2,12 +2,14 @@
 using Application.Features.AboutUs.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 
 namespace Application.Features.AboutUs.Commands.UpdateAboutUs
 {
-    public class UpdateAboutUsCommand:IRequest<UpdatedAboutUsDto>
+    public class UpdateAboutUsCommand:IRequest<UpdatedAboutUsDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int EmendatorAdminId { get; set; }

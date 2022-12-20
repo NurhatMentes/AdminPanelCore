@@ -33,7 +33,8 @@ namespace Persistence
             services.AddScoped<ITablesLogRepository, TablesLogRepository>();
             services.AddScoped<IUserLogRepository, UserLogRepository>();
             services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();

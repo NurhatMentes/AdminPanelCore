@@ -3,6 +3,7 @@ using Application.Features.Products.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -10,8 +11,9 @@ using Serilog.Context;
 
 namespace Application.Features.Products.Commands.CreateProduct
 {
-    public class CreateProductCommand : IRequest<CreatedProductDto>
+    public class CreateProductCommand : IRequest<CreatedProductDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int CategoryId { get; set; }
         public int? SubCategoryId { get; set; }
         public int UserId { get; set; }

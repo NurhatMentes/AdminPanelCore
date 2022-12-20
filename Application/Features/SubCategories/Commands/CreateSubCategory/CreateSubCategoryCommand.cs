@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.SubCategories.Commands.CreateSubCategory
 {
-    public class CreateSubCategoryCommand : IRequest<CreatedSubCategoryDto>
+    public class CreateSubCategoryCommand : IRequest<CreatedSubCategoryDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public IFormFile File { get; set; }
         public int UserId { get; set; }
         public int CategoryId { get; set; }

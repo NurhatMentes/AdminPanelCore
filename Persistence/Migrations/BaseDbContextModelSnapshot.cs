@@ -225,7 +225,7 @@ namespace Persistence.Migrations
                     b.ToTable("AboutUs", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Blogs", b =>
+            modelBuilder.Entity("Domain.Entities.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -347,11 +347,9 @@ namespace Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("BlogId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("BlogId");
-
-                    b.Property<int>("BlogsId")
-                        .HasColumnType("int");
 
                     b.Property<string>("CommentContent")
                         .IsRequired()
@@ -364,10 +362,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Date");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -386,7 +380,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogsId");
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("ProductId");
 
@@ -459,6 +453,33 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Contact", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.EntityAccessRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EntityName");
+
+                    b.Property<string>("Roles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Roles");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EntityAccessRoles", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.HomeVideo", b =>
@@ -988,7 +1009,7 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Blogs", b =>
+            modelBuilder.Entity("Domain.Entities.Blog", b =>
                 {
                     b.HasOne("Domain.Entities.Category", "Categories")
                         .WithMany("Blogs")
@@ -1003,7 +1024,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.ExtendedUser", "User")
-                        .WithMany("Blogs")
+                        .WithMany("Blog")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1028,9 +1049,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
-                    b.HasOne("Domain.Entities.Blogs", "Blogs")
+                    b.HasOne("Domain.Entities.Blog", "Blogs")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogsId")
+                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1184,7 +1205,7 @@ namespace Persistence.Migrations
                     b.Navigation("UserOperationClaims");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Blogs", b =>
+            modelBuilder.Entity("Domain.Entities.Blog", b =>
                 {
                     b.Navigation("Comments");
                 });
@@ -1216,7 +1237,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("AboutUs");
 
-                    b.Navigation("Blogs");
+                    b.Navigation("Blog");
 
                     b.Navigation("Categories");
 

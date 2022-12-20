@@ -5,17 +5,14 @@ using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Products.Queries
 {
-    public class GetListByStateProductQuery : IRequest<ProductListModel>
+    public class GetListByStateProductQuery : IRequest<ProductListModel>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public PageRequest PageRequest { get; set; }
         public bool State { get; set; }
 

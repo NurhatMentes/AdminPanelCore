@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Blogs.Commands.CreateBlog;
-using Application.Features.Blogs.Dtos;
+﻿using Application.Features.Blogs.Dtos;
 using Application.Features.Blogs.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Blogs.Commands.UpdateBlog
 {
-    public class UpdateBlogCommand:IRequest<UpdatedBlogDto>
+    public class UpdateBlogCommand:IRequest<UpdatedBlogDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int BlogId { get; set; }
         public int UserId { get; set; }
         public int? EmendatorAdminId { get; set; }

@@ -1,17 +1,18 @@
 ﻿using Application.Features.Products.Models;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries
 {
-    public class GetListProductQuery : IRequest<ProductListModel>
+    public class GetListProductQuery : IRequest<ProductListModel>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public PageRequest PageRequest { get; set; }
 
         public class GetListProductQueryHandler : IRequestHandler<GetListProductQuery, ProductListModel>

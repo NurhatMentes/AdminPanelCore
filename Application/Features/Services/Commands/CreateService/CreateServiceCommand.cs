@@ -3,14 +3,16 @@ using Application.Features.Services.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Services.Commands.CreateService
 {
-    public class CreateServiceCommand:IRequest<CreatedServiceDto>
+    public class CreateServiceCommand:IRequest<CreatedServiceDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0","1" };
         public int UserId { get; set; }
         public IFormFile File { get; set; }
         public string Title { get; set; }

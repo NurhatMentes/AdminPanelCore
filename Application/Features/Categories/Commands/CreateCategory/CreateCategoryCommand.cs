@@ -3,14 +3,16 @@ using Application.Features.Categories.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Categories.Commands.CreateCategory
 {
-    public class CreateCategoryCommand:IRequest<CreatedCategoryDto>
+    public class CreateCategoryCommand:IRequest<CreatedCategoryDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int UserId { get; set; }
         public IFormFile? File { get; set; }
         public string CategoryName { get; set; }

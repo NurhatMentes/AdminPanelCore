@@ -3,14 +3,16 @@ using Application.Features.Services.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Services.Commands.UpdateService
 {
-    public class UpdateServiceCommand : IRequest<UpdatedServiceDto>
+    public class UpdateServiceCommand : IRequest<UpdatedServiceDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1" };
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int EmendatorAdminId { get; set; }

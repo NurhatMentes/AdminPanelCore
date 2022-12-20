@@ -7,6 +7,7 @@ namespace Application.Features.AboutUs.Commands.CreateAboutUs
 {
     public class CreateAboutUsCommand:IRequest<CreatedAboutUsDto>
     {
+        public string[] Roles => new[] { "0", "1","2" };
         public int? UserId { get; set; }
         public int? EmendatorAdminId { get; set; }
         public string Description { get; set; }

@@ -2,12 +2,14 @@
 using Application.Features.Contact.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 
 namespace Application.Features.Contact.Commands.UpdateContact
 {
-    public class UpdateContactCommand:IRequest<UpdatedContactDto>
+    public class UpdateContactCommand:IRequest<UpdatedContactDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1" };
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int EmendatorAdminId { get; set; }

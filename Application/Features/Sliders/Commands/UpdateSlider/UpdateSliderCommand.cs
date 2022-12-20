@@ -3,14 +3,16 @@ using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Sliders.Commands.UpdateSlider
 {
-    public class UpdateSliderCommand : IRequest<UpdatedSliderDto>
+    public class UpdateSliderCommand : IRequest<UpdatedSliderDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int SliderId { get; set; }
         public int UserId { get; set; }
         public int EmendatorAdminId { get; set; }

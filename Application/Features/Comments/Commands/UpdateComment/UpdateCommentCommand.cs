@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Features.Comments.Commands.CreateComment;
-using Application.Features.Comments.Dtos;
+﻿using Application.Features.Comments.Dtos;
 using Application.Features.Comments.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Comments.Commands.UpdateComment
 {
-    public class UpdateCommentCommand:IRequest<UpdatedCommentDto>
+    public class UpdateCommentCommand:IRequest<UpdatedCommentDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int CommentId { get; set; }
         public int? BlogId { get; set; }
         public int? ProductId { get; set; }

@@ -6,11 +6,13 @@ using Application.Features.SubCategories.Dtos;
 using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.SubCategories.Commands.UpdateSubCategory
 {
-    public class UpdateSubCategoryCommand : IRequest<UpdatedSubCategoryDto>
+    public class UpdateSubCategoryCommand : IRequest<UpdatedSubCategoryDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public IFormFile File { get; set; }
         public int Id { get; set; }
         public int? UserId { get; set; }

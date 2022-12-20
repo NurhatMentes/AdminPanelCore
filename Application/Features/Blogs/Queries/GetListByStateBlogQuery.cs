@@ -5,21 +5,16 @@ using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Core.Persistence.Repositories;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Blogs.Queris
 {
-    public class GetListByStateBlogQuery:IRequest<BlogListModel>
+    public class GetListByStateBlogQuery:IRequest<BlogListModel>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public PageRequest PageRequest { get; set; } 
         public bool State { get; set; }
-
 
         public class GetListByStateBlogQueryHandler : IRequestHandler<GetListByStateBlogQuery, BlogListModel>
         {

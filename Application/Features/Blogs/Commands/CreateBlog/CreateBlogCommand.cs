@@ -3,14 +3,16 @@ using Application.Features.Blogs.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Blogs.Commands.CreateBlog
 {
-    public class CreateBlogCommand:IRequest<CreatedBlogDto>
+    public class CreateBlogCommand:IRequest<CreatedBlogDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public int UserId { get; set; }
         public int CategoryId { get; set; }
         public int? SubCategoryId { get; set; }

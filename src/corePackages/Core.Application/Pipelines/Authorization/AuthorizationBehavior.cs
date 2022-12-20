@@ -1,4 +1,6 @@
-﻿using Core.CrossCuttingConcerns.Exceptions;
+﻿using System.Security.Claims;
+using Core.CrossCuttingConcerns.Exceptions;
+using Core.Security.Entities;
 using Core.Security.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +22,7 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
                                         RequestHandlerDelegate<TResponse> next)
     {
         List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+       
 
         if (roleClaims == null) throw new AuthorizationException("Claims not found.");
 

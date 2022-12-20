@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.Sliders.Commands.CreateSlider
 {
-    public class CreateSliderCommand : IRequest<CreatedSliderDto>
+    public class CreateSliderCommand : IRequest<CreatedSliderDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1", "2" };
         public IFormFile File { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }

@@ -1,12 +1,14 @@
 ﻿using Application.Features.Contact.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 
 namespace Application.Features.Contact.Commands.CreateContact
 {
-    public class CreateContactCommand:IRequest<CreatedContactDto>
+    public class CreateContactCommand:IRequest<CreatedContactDto>, ISecuredRequest
     {
+        public string[] Roles => new[] { "0", "1" };
         public int? UserId { get; set; }
         public string Adress { get; set; }
         public string Tel { get; set; }
