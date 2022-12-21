@@ -7,6 +7,7 @@ using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
+using Application.Services.TablesLogService;
 
 namespace Application.Features.SubCategories.Commands.CreateSubCategory
 {
@@ -25,13 +26,16 @@ namespace Application.Features.SubCategories.Commands.CreateSubCategory
             IMapper _mapper;
             IFileService _imageService;
             private readonly SubCategoryBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateSubCategoryCommandHandler(ISubCategoryRepository repository, IMapper mapper, IFileService imageService, SubCategoryBusinessRules businessRules)
+
+            public CreateSubCategoryCommandHandler(ISubCategoryRepository repository, IMapper mapper, IFileService imageService, SubCategoryBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedSubCategoryDto> Handle(CreateSubCategoryCommand request, CancellationToken cancellationToken)
@@ -53,6 +57,8 @@ namespace Application.Features.SubCategories.Commands.CreateSubCategory
                 //Domain.Entities.Slider mapped = _mapper.Map<Domain.Entities.Slider>(request);
                 SubCategory created = await _repository.AddAsync(subCategory);
                 CreatedSubCategoryDto createdDto = _mapper.Map<CreatedSubCategoryDto>(created);
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.SubCategoryId, "Alt Kategori", createdDto.SubCategoryName);
+
 
                 return createdDto;
             }

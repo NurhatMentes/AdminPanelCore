@@ -2,6 +2,7 @@
 using Application.Features.ProductSliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -22,13 +23,16 @@ namespace Application.Features.ProductSliders.Commands.UpdateProductSlider
             IMapper _mapper;
             IFileService _imageService;
             private readonly ProductSliderBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateProductSliderCommandHandler(IProductSliderRepository repository, IMapper mapper, IFileService imageService, ProductSliderBusinessRules businessRules)
+
+            public UpdateProductSliderCommandHandler(IProductSliderRepository repository, IMapper mapper, IFileService imageService, ProductSliderBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedProductSliderDto> Handle(UpdateProductSliderCommand request, CancellationToken cancellationToken)
@@ -45,6 +49,8 @@ namespace Application.Features.ProductSliders.Commands.UpdateProductSlider
 
                 ProductSlider updated = await _repository.UpdateAsync(entity);
                 UpdatedProductSliderDto updatedDto = _mapper.Map<UpdatedProductSliderDto>(updated);
+                await _logger.UpdateTablesLog(0, updatedDto.Id, "Ürün Slider", updatedDto.ImgUrl);
+
 
                 return updatedDto;
             }

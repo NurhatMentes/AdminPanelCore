@@ -3,6 +3,7 @@ using Application.Features.SiteIdentity.Rules;
 using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
@@ -27,13 +28,16 @@ namespace Application.Features.SiteIdentity.Commands.UpdateSiteIdentity
             IMapper _mapper;
             IFileService _imageService;
             private readonly SiteIdentityBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SiteIdentityBusinessRules businessRules)
+
+            public UpdateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SiteIdentityBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedSiteIdentityDto> Handle(UpdateSiteIdentityCommand request, CancellationToken cancellationToken)
@@ -57,6 +61,8 @@ namespace Application.Features.SiteIdentity.Commands.UpdateSiteIdentity
                 Domain.Entities.SiteIdentity mapped = _mapper.Map<Domain.Entities.SiteIdentity>(siteIdentity);
                 Domain.Entities.SiteIdentity updated = await _repository.UpdateAsync(mapped);
                 UpdatedSiteIdentityDto mappedDto = _mapper.Map<UpdatedSiteIdentityDto>(updated);
+                await _logger.UpdateTablesLog(mappedDto.EmendatorAdminId, mappedDto.Id, "Site Kimliği", mappedDto.Title);
+
 
                 return mappedDto;
             }

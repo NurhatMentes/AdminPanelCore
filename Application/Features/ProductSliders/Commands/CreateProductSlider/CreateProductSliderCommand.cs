@@ -2,6 +2,7 @@
 using Application.Features.ProductSliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -20,13 +21,16 @@ namespace Application.Features.ProductSliders.Commands.CreateProductSlider
             private readonly IMapper _mapper;
             private readonly IFileService _imageService; 
             private readonly ProductSliderBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateProductSliderCommandHandler(IProductSliderRepository repository, IMapper mapper, IFileService imageService, ProductSliderBusinessRules businessRules)
+
+            public CreateProductSliderCommandHandler(IProductSliderRepository repository, IMapper mapper, IFileService imageService, ProductSliderBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedProductSliderDto> Handle(CreateProductSliderCommand request, CancellationToken cancellationToken)
@@ -43,6 +47,8 @@ namespace Application.Features.ProductSliders.Commands.CreateProductSlider
 
                 ProductSlider created = await _repository.AddAsync(productSlider);
                 CreatedProductSliderDto createdDto = _mapper.Map<CreatedProductSliderDto>(created);
+                await _logger.CreateTablesLog(0, createdDto.Id, "Ürün Slider", createdDto.ImgUrl);
+
 
                 return createdDto;
             }

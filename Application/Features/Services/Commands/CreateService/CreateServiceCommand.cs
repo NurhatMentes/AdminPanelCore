@@ -2,6 +2,7 @@
 using Application.Features.Services.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -25,13 +26,16 @@ namespace Application.Features.Services.Commands.CreateService
             IMapper _mapper;
             IFileService _imageService;
             private readonly ServiceBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateServiceCommandHandler(IServiceRepository repository, IMapper mapper, IFileService imageService, ServiceBusinessRules businessRules)
+
+            public CreateServiceCommandHandler(IServiceRepository repository, IMapper mapper, IFileService imageService, ServiceBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedServiceDto> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
@@ -52,6 +56,8 @@ namespace Application.Features.Services.Commands.CreateService
 
                 Service created = await _repository.AddAsync(service);
                 CreatedServiceDto createdDto = _mapper.Map<CreatedServiceDto>(created);
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Servis", createdDto.Title);
+
 
                 return createdDto;
             }
