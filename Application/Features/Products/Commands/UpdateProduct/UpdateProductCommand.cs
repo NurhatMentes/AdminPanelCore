@@ -7,6 +7,7 @@ using Application.Features.Products.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
+using Application.Services.TablesLogService;
 
 namespace Application.Features.Products.Commands.UpdateProduct;
 
@@ -34,14 +35,16 @@ public class UpdateProductCommand : IRequest<UpdatedProductDto>, ISecuredRequest
         private readonly IMapper _mapper;
         private readonly IFileService _fileService;
         private readonly ProductBusinessRules _businessRules;
+        private readonly ITablesLogService _logger;
 
         public UpdateProductCommandHandler(IProductRepository repository, IMapper mapper, IFileService imageService,
-            ProductBusinessRules businessRules)
+            ProductBusinessRules businessRules, ITablesLogService logger)
         {
             _repository = repository;
             _mapper = mapper;
             _fileService = imageService;
             _businessRules = businessRules;
+            _logger = logger;
         }
 
         public async Task<UpdatedProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -79,6 +82,7 @@ public class UpdateProductCommand : IRequest<UpdatedProductDto>, ISecuredRequest
 
             var updated = await _repository.UpdateAsync(entity);
             var updatedDto = _mapper.Map<UpdatedProductDto>(updated);
+            await _logger.UpdateTablesLog(updatedDto.EmendatorAdminId, updatedDto.ProductId, "Ürün", updatedDto.Title);
 
             return updatedDto;
         }

@@ -2,6 +2,7 @@
 using Application.Features.Blogs.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -28,13 +29,15 @@ namespace Application.Features.Blogs.Commands.CreateBlog
             private readonly IMapper _mapper;
             private readonly IFileService _fileService;
             private readonly BlogBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateBlogCommandHandler(IBlogRepository repository, IMapper mapper, IFileService imageService, BlogBusinessRules businessRules)
+            public CreateBlogCommandHandler(IBlogRepository repository, IMapper mapper, IFileService imageService, BlogBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _fileService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedBlogDto> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
@@ -62,7 +65,7 @@ namespace Application.Features.Blogs.Commands.CreateBlog
 
                 Blog created = await _repository.AddAsync(blog);
                 CreatedBlogDto createdDto = _mapper.Map<CreatedBlogDto>(created);
-
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Blog", createdDto.Title);
                 return createdDto;
             }
         }

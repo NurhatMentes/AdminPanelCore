@@ -1,12 +1,9 @@
 ﻿using Application.Features.HomeVideos.Dtos;
 using Application.Features.HomeVideos.Rules;
-using Application.Features.SubCategories.Commands.CreateSubCategory;
-using Application.Features.SubCategories.Dtos;
-using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
-using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
@@ -21,17 +18,19 @@ namespace Application.Features.HomeVideos.Commands.CreateHomeVideo
 
         public class CreateHomeVideoCommandHandler : IRequestHandler<CreateHomeVideoCommand, CreatedHomeVideoDto>
         {
-            IHomeVideoRepository _repository;
-            IMapper _mapper;
-            IFileService _imageService;
+            private readonly IHomeVideoRepository _repository;
+            private readonly IMapper _mapper;
+            private readonly IFileService _imageService;
             private readonly HomeVideoBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateHomeVideoCommandHandler(IHomeVideoRepository repository, IMapper mapper, IFileService imageService, HomeVideoBusinessRules businessRules)
+            public CreateHomeVideoCommandHandler(IHomeVideoRepository repository, IMapper mapper, IFileService imageService, HomeVideoBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedHomeVideoDto> Handle(CreateHomeVideoCommand request, CancellationToken cancellationToken)
@@ -50,7 +49,7 @@ namespace Application.Features.HomeVideos.Commands.CreateHomeVideo
 
                 Domain.Entities.HomeVideo created = await _repository.AddAsync(homeVideo);
                 CreatedHomeVideoDto createdDto = _mapper.Map<CreatedHomeVideoDto>(created);
-
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Kategori", createdDto.Title);
                 return createdDto;
             }
         }

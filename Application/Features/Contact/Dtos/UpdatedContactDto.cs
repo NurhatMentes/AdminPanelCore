@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int? UserId { get; set; }
-        public int? EmendatorAdminId { get; set; }
+        public int EmendatorAdminId { get; set; }
         public string Adress { get; set; }
         public string Tel { get; set; }
         public string Email { get; set; }

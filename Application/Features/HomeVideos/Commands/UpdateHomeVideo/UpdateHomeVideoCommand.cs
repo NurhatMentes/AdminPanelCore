@@ -5,6 +5,7 @@ using Application.Features.SubCategories.Dtos;
 using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -31,13 +32,15 @@ namespace Application.Features.HomeVideos.Commands.UpdateHomeVideo
             IMapper _mapper;
             IFileService _imageService;
             private readonly HomeVideoBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateHomeVideoCommandHandler(IHomeVideoRepository repository, IMapper mapper, IFileService imageService, HomeVideoBusinessRules businessRules)
+            public UpdateHomeVideoCommandHandler(IHomeVideoRepository repository, IMapper mapper, IFileService imageService, HomeVideoBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedHomeVideoDto> Handle(UpdateHomeVideoCommand request, CancellationToken cancellationToken)
@@ -56,9 +59,9 @@ namespace Application.Features.HomeVideos.Commands.UpdateHomeVideo
 
                 Domain.Entities.HomeVideo mapped = _mapper.Map<Domain.Entities.HomeVideo>(entity);
                 Domain.Entities.HomeVideo updated = await _repository.UpdateAsync(mapped);
-                UpdatedHomeVideoDto mappedDto = _mapper.Map<UpdatedHomeVideoDto>(updated);
-
-                return mappedDto;
+                UpdatedHomeVideoDto updatedDto = _mapper.Map<UpdatedHomeVideoDto>(updated);
+                await _logger.UpdateTablesLog(updatedDto.EmendatorAdminId, updatedDto.HomeVideoId, "Ama Video", updatedDto.Title);
+                return updatedDto;
             }
         }
     }

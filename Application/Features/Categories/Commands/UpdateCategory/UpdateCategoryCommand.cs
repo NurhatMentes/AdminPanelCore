@@ -2,6 +2,7 @@
 using Application.Features.Categories.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -27,13 +28,15 @@ namespace Application.Features.Categories.Commands.UpdateCategory
             IMapper _mapper;
             IFileService _imageService;
             private readonly CategoryBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper, IFileService imageService, CategoryBusinessRules businessRules)
+            public UpdateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper, IFileService imageService, CategoryBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedCategoryDto> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
@@ -54,7 +57,7 @@ namespace Application.Features.Categories.Commands.UpdateCategory
 
                 Category updated = await _repository.UpdateAsync(entity);
                 UpdatedCategoryDto updatedDto = _mapper.Map<UpdatedCategoryDto>(updated);
-
+                await _logger.UpdateTablesLog(updatedDto.EmendatorAdminId, updatedDto.Id, "Kategori", updatedDto.CategoryName);
                 return updatedDto;
             }
         }

@@ -2,6 +2,7 @@
 using Application.Features.Products.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -32,13 +33,15 @@ namespace Application.Features.Products.Commands.CreateProduct
             IMapper _mapper;
             IFileService _fileService;
             private readonly ProductBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateProductCommandHandler(IProductRepository repository, IMapper mapper, IFileService imageService, ProductBusinessRules businessRules)
+            public CreateProductCommandHandler(IProductRepository repository, IMapper mapper, IFileService imageService, ProductBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _fileService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -71,7 +74,7 @@ namespace Application.Features.Products.Commands.CreateProduct
 
                 Product created = await _repository.AddAsync(product);
                 CreatedProductDto createdDto = _mapper.Map<CreatedProductDto>(created);
-
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Ürün", createdDto.Title);
                 return createdDto;
             }
         }

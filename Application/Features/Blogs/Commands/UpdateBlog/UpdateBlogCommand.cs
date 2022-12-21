@@ -2,6 +2,7 @@
 using Application.Features.Blogs.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -30,13 +31,15 @@ namespace Application.Features.Blogs.Commands.UpdateBlog
             private readonly IMapper _mapper;
             private readonly IFileService _fileService;
             private readonly BlogBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateBlogCommandHandler(IBlogRepository repository, IMapper mapper, IFileService imageService, BlogBusinessRules businessRules)
+            public UpdateBlogCommandHandler(IBlogRepository repository, IMapper mapper, IFileService imageService, BlogBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _fileService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedBlogDto> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
@@ -63,6 +66,7 @@ namespace Application.Features.Blogs.Commands.UpdateBlog
 
                 Blog updated = await _repository.UpdateAsync(entity);
                 UpdatedBlogDto updatedDto = _mapper.Map<UpdatedBlogDto>(updated);
+                await _logger.UpdateTablesLog(updatedDto.EmendatorAdminId, updatedDto.BlogId, "Blog", updatedDto.Title);
 
                 return updatedDto;
             }

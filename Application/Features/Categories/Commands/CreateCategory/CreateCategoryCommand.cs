@@ -2,6 +2,7 @@
 using Application.Features.Categories.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -25,13 +26,15 @@ namespace Application.Features.Categories.Commands.CreateCategory
             private readonly IMapper _mapper;
             private readonly IFileService _imageService;
             private readonly CategoryBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper, IFileService imageService, CategoryBusinessRules businessRules)
+            public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper, IFileService imageService, CategoryBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedCategoryDto> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
@@ -52,7 +55,7 @@ namespace Application.Features.Categories.Commands.CreateCategory
 
                 Category created = await _repository.AddAsync(category);
                 CreatedCategoryDto createdDto = _mapper.Map<CreatedCategoryDto>(created);
-
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Kategori", createdDto.CategoryName);
                 return createdDto;
             }
         }

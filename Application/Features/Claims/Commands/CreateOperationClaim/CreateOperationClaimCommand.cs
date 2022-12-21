@@ -1,6 +1,7 @@
 ﻿using Application.Features.Claims.Dtos;
 using Application.Features.Claims.Rules;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
@@ -33,7 +34,6 @@ namespace Application.Features.Claims.Commands.CreateOperationClaim
                 OperationClaim mappedOperationClaim = _mapper.Map<OperationClaim>(request);
                 OperationClaim createdOperationClaim = await _repository.AddAsync(mappedOperationClaim);
                 CreatedOperationClaimDto createdOperationClaimDto = _mapper.Map<CreatedOperationClaimDto>(createdOperationClaim);
-
                 return createdOperationClaimDto;
             }
         }
