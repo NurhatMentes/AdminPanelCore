@@ -7,6 +7,7 @@ using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
+using Application.Services.TablesLogService;
 
 namespace Application.Features.Sliders.Commands.CreateSlider
 {
@@ -24,13 +25,16 @@ namespace Application.Features.Sliders.Commands.CreateSlider
             IMapper _mapper;
             IFileService _imageService;
             private readonly SliderBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateSliderCommandHandler(ISliderRepository repository, IMapper mapper, IFileService imageService, SliderBusinessRules businessRules)
+
+            public CreateSliderCommandHandler(ISliderRepository repository, IMapper mapper, IFileService imageService, SliderBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedSliderDto> Handle(CreateSliderCommand request, CancellationToken cancellationToken)
@@ -51,6 +55,8 @@ namespace Application.Features.Sliders.Commands.CreateSlider
                 //Domain.Entities.Slider mapped = _mapper.Map<Domain.Entities.Slider>(request);
                 Slider created = await _repository.AddAsync(slider);
                 CreatedSliderDto createdDto = _mapper.Map<CreatedSliderDto>(created);
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.SliderId, "Slider", createdDto.Title);
+
 
                 return createdDto;
             }

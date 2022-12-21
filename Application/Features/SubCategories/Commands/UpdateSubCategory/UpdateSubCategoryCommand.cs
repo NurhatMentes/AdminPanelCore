@@ -7,6 +7,7 @@ using Application.Features.SubCategories.Rules;
 using Application.Services.FileService;
 using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
+using Application.Services.TablesLogService;
 
 namespace Application.Features.SubCategories.Commands.UpdateSubCategory
 {
@@ -27,13 +28,16 @@ namespace Application.Features.SubCategories.Commands.UpdateSubCategory
             IMapper _mapper;
             IFileService _imageService;
             private readonly SubCategoryBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateSubCategoryCommandHandler(ISubCategoryRepository repository, IMapper mapper, IFileService imageService, SubCategoryBusinessRules businessRules)
+
+            public UpdateSubCategoryCommandHandler(ISubCategoryRepository repository, IMapper mapper, IFileService imageService, SubCategoryBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedSubCategoryDto> Handle(UpdateSubCategoryCommand request, CancellationToken cancellationToken)
@@ -54,6 +58,8 @@ namespace Application.Features.SubCategories.Commands.UpdateSubCategory
                 SubCategory mapped = _mapper.Map<SubCategory>(entity);
                 SubCategory updated = await _repository.UpdateAsync(mapped);
                 UpdatedSubCategoryDto mappedDto = _mapper.Map<UpdatedSubCategoryDto>(updated);
+                await _logger.UpdateTablesLog(mappedDto.EmendatorAdminId, mappedDto.SubCategoryId, "Alt Kategori", mappedDto.SubCategoryName);
+
 
                 return mappedDto;
             }

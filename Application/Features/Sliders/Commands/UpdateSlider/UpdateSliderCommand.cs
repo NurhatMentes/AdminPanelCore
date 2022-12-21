@@ -2,6 +2,7 @@
 using Application.Features.Sliders.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
@@ -27,13 +28,16 @@ namespace Application.Features.Sliders.Commands.UpdateSlider
             IMapper _mapper;
             IFileService _imageService;
             private readonly SliderBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public UpdateSliderCommandHandler(ISliderRepository repository, IMapper mapper, IFileService imageService, SliderBusinessRules businessRules)
+
+            public UpdateSliderCommandHandler(ISliderRepository repository, IMapper mapper, IFileService imageService, SliderBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<UpdatedSliderDto> Handle(UpdateSliderCommand request, CancellationToken cancellationToken)
@@ -54,6 +58,7 @@ namespace Application.Features.Sliders.Commands.UpdateSlider
                 Slider mapped = _mapper.Map<Slider>(entity);
                 Slider updated = await _repository.UpdateAsync(mapped);
                 UpdatedSliderDto mappedDto = _mapper.Map<UpdatedSliderDto>(updated);
+                await _logger.UpdateTablesLog(mappedDto.EmendatorAdminId, mappedDto.SliderId, "Alt Kategori", mappedDto.Title);
 
                 return mappedDto;
             }

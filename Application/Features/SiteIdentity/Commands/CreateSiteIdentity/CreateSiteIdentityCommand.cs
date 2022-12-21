@@ -2,6 +2,7 @@
 using Application.Features.SiteIdentity.Rules;
 using Application.Services.FileService;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,13 +22,16 @@ namespace Application.Features.SiteIdentity.Commands.CreateSiteIdentity
             IMapper _mapper;
             IFileService _imageService;
             private readonly SiteIdentityBusinessRules _businessRules;
+            private readonly ITablesLogService _logger;
 
-            public CreateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SiteIdentityBusinessRules businessRules)
+
+            public CreateSiteIdentityCommandHandler(ISiteIdentityRepository repository, IMapper mapper, IFileService imageService, SiteIdentityBusinessRules businessRules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _imageService = imageService;
                 _businessRules = businessRules;
+                _logger = logger;
             }
 
             public async Task<CreatedSiteIdentityDto> Handle(CreateSiteIdentityCommand request, CancellationToken cancellationToken)
@@ -48,6 +52,8 @@ namespace Application.Features.SiteIdentity.Commands.CreateSiteIdentity
 
                 Domain.Entities.SiteIdentity created = await _repository.AddAsync(siteIdentity);
                 CreatedSiteIdentityDto createdDto = _mapper.Map<CreatedSiteIdentityDto>(created);
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Site Kimliği", createdDto.Title);
+
 
                 return createdDto;
             }
