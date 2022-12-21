@@ -1,6 +1,8 @@
 using Application;
+using Application.Services.TablesLogService;
 using Core.Security.Encryption;
 using Core.Security.JWT;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -16,6 +18,7 @@ builder.Services.AddSecurityServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 //builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
+
 
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();

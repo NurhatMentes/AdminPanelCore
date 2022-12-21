@@ -1,6 +1,7 @@
 ﻿using Application.Features.AboutUs.Dtos;
 using Application.Features.AboutUs.Rules;
 using Application.Services.Repositories;
+using Application.Services.TablesLogService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
@@ -21,13 +22,16 @@ namespace Application.Features.AboutUs.Commands.UpdateAboutUs
             private readonly IAboutUsRepository _repository;
             private readonly IMapper _mapper;
             private readonly AboutUsBusinessRules _rules;
+            private readonly ITablesLogService _logger;
 
 
-            public UpdateAboutUsCommandHandler(IAboutUsRepository repository, IMapper mapper, AboutUsBusinessRules rules)
+
+            public UpdateAboutUsCommandHandler(IAboutUsRepository repository, IMapper mapper, AboutUsBusinessRules rules, ITablesLogService logger)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _rules = rules;
+                _logger = logger;
             }
 
             public async Task<UpdatedAboutUsDto> Handle(UpdateAboutUsCommand request, CancellationToken cancellationToken)
@@ -36,6 +40,8 @@ namespace Application.Features.AboutUs.Commands.UpdateAboutUs
                 Domain.Entities.AboutUs mapped = _mapper.Map<Domain.Entities.AboutUs>(request);
                 Domain.Entities.AboutUs updated = await _repository.UpdateAsync(mapped);
                 UpdatedAboutUsDto uptadedDto = _mapper.Map<UpdatedAboutUsDto>(updated);
+                await _logger.UpdateTablesLog(uptadedDto.EmendatorAdminId, uptadedDto.Id, "Hakkımızda", uptadedDto.Description);
+
 
                 return uptadedDto;
             }

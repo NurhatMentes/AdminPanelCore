@@ -24,6 +24,7 @@ using Application.Features.TablesLogs.Rules;
 using Application.Services.FileService;
 using Application.Features.HomeVideos.Rules;
 using Application.Features.UserOperationClaims.Rules;
+using Application.Services.TablesLogService;
 
 
 namespace Application
@@ -55,6 +56,7 @@ namespace Application
             services.AddScoped<OperationClaimBusinessRules>();
             services.AddScoped<UserOperationClaimBusinessRules>();
 
+            services.AddTransient<ITablesLogService, TablesLogManager>();
             services.AddTransient<IAuthService, AuthManager>();
             services.AddTransient<IFileService, FileManager>();
             services.AddTransient<ITokenHelper, JwtHelper>();
