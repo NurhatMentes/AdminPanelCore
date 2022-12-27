@@ -20,6 +20,6 @@ namespace Application.Features.Products.Dtos
         public string Keywords { get; set; }
         public string ImgUrl { get; set; }
         public bool State { get; set; }
-
+        public DateTime CreationTime { get; set; }
     }
 }

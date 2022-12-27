@@ -43,7 +43,7 @@ public class JwtHelper : ITokenHelper
         {
             UserId = user.Id,
             Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-            Expires = DateTime.UtcNow.AddDays(7),
+            Expires = DateTime.UtcNow.AddMinutes(60),
             Created = DateTime.UtcNow,
             CreatedByIp = ipAddress
         };

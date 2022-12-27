@@ -56,7 +56,7 @@ namespace Application.Features.Services.Commands.CreateService
 
                 Service created = await _repository.AddAsync(service);
                 CreatedServiceDto createdDto = _mapper.Map<CreatedServiceDto>(created);
-                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Servis", createdDto.Title);
+                await _logger.CreateTablesLog(createdDto.UserId, createdDto.Id, "Hizmet", createdDto.Title);
 
 
                 return createdDto;

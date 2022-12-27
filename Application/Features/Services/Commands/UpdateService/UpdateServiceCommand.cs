@@ -58,7 +58,7 @@ namespace Application.Features.Services.Commands.UpdateService
 
                 Service created = await _repository.UpdateAsync(service);
                 UpdatedServiceDto createdDto = _mapper.Map<UpdatedServiceDto>(created);
-                await _logger.UpdateTablesLog(createdDto.EmendatorAdminId, createdDto.Id, "Servis", createdDto.Title);
+                await _logger.UpdateTablesLog(createdDto.EmendatorAdminId, createdDto.Id, "Hizmet", createdDto.Title);
 
 
                 return createdDto;

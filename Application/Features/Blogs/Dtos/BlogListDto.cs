@@ -11,5 +11,5 @@ public class BlogListDto
     public string Content { get; set; }
     public string ImgUrl { get; set; }
     public bool State { get; set; }
-
+    public DateTime CreationTime { get; set; }
 }

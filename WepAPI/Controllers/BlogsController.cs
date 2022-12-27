@@ -42,5 +42,22 @@ namespace WepAPI.Controllers
             BlogListModel result = await Mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("GetCountOfBlog")]
+        public async Task<IActionResult> GetCountOfBlog([FromQuery] PageRequest pageRequest)
+        {
+            GetListBlogQuery query = new GetListBlogQuery { PageRequest = pageRequest };
+            BlogListModel result = await Mediator.Send(query);
+            return Ok(result.Count);
+        }
+
+        [HttpGet("GetEndOfBlog")]
+        public async Task<IActionResult> GetEndOfBlog([FromQuery] PageRequest pageRequest)
+        {
+            GetListBlogQuery query = new GetListBlogQuery { PageRequest = pageRequest };
+            BlogListModel result = await Mediator.Send(query);
+            return Ok(result.Items.OrderByDescending(p => p.Id).Take(3)
+                .Select(p => p.Title + " - Ekleyen:" + p.UserName + ", Güncelleyen:" + p.EmendatorAdminName + ", Tarih:" + p.CreationTime).ToList());
+        }
     }
 }

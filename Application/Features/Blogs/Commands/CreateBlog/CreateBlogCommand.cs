@@ -8,6 +8,7 @@ using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Features.Blogs.Commands.CreateBlog
 {
@@ -47,8 +48,6 @@ namespace Application.Features.Blogs.Commands.CreateBlog
                 if (request.SubCategoryId != null)
                     await _businessRules.SubCategoryShouldExistWhenRequested(request.SubCategoryId);
                 await _fileService.ImageUpload(request.File, "Blogs");
-
-
 
                 Blog blog = new Blog()
                 {

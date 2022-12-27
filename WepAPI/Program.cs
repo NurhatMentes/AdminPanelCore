@@ -1,8 +1,6 @@
 using Application;
-using Application.Services.TablesLogService;
 using Core.Security.Encryption;
 using Core.Security.JWT;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,12 +16,13 @@ builder.Services.AddSecurityServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 //builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
-
+//builder.Services.AddSession(opt => { opt.IdleTimeout = TimeSpan.FromMinutes(5); });
 
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
+   
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -32,6 +31,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = tokenOptions.Issuer,
         ValidAudience = tokenOptions.Audience,
         ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.FromSeconds(300),
         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
     };
 });

@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-using Core.CrossCuttingConcerns.Exceptions;
-using Core.Security.Entities;
+﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;

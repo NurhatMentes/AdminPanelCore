@@ -42,5 +42,30 @@ namespace WepAPI.Controllers
             ProductListModel result = await Mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("GetCountOfProduct")]
+        public async Task<IActionResult> GetCountOfProduct([FromQuery] PageRequest pageRequest)
+        {
+            GetListProductQuery query = new GetListProductQuery { PageRequest = pageRequest };
+            ProductListModel result = await Mediator.Send(query);
+            return Ok(result.Count);
+        }
+
+        [HttpGet("GetEndOfProduct")]
+        public async Task<IActionResult> GetEndOfProduct([FromQuery] PageRequest pageRequest)
+        {
+            GetListProductQuery query = new GetListProductQuery { PageRequest = pageRequest };
+            ProductListModel result = await Mediator.Send(query);
+            return Ok(result.Items.OrderByDescending(p=>p.ProductId).Take(3)
+                .Select(p=>p.Title+" - Ekleyen:"+p.UserName +", Güncelleyen:"+p.EmendatorAdminName+", E.Tarih:"+p.CreationTime + ", G.Tarih:"+p.UpdateDate).ToList());
+        }
+
+        [HttpGet("GetTotalPriceProduct")]
+        public async Task<IActionResult> GetTotalPriceProduct([FromQuery] PageRequest pageRequest)
+        {
+            GetListProductQuery query = new GetListProductQuery { PageRequest = pageRequest };
+            ProductListModel result = await Mediator.Send(query);
+            return Ok(result.Items.Sum(p => p.Price));
+        }
     }
 }

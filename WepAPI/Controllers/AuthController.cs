@@ -1,9 +1,15 @@
-﻿using Application.Auth.Dtos;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Application.Auth.Dtos;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Dtos;
 using Core.Security.Entities;
+using Core.Security.JWT;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WepAPI.Controllers
 {
@@ -11,6 +17,7 @@ namespace WepAPI.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
@@ -26,7 +33,7 @@ namespace WepAPI.Controllers
         }
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)
         {
-            CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.Now.AddDays(7) };
+            CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.Now.AddMinutes(60) , Secure = true};
             Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
         }
 
